@@ -6,7 +6,7 @@ import java.util.List;
 
 /**
  * @Description: Comment实体类
- * @Author Anmiho
+ * @Author mian
  * @Date 2020/12/14 23:10
  */
 public class Comment implements Serializable {

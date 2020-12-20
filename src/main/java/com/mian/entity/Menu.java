@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
  * @Description: Menu实体类
- * @Author Anmiho
+ * @Author mian
  * @Date 2020/12/14 23:12
  */
 public class Menu implements Serializable {

@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
  * @Description: Link实体类
- * @Author Anmiho
+ * @Author mian
  * @Date 2020/12/14 23:11
  */
 public class Link implements Serializable {

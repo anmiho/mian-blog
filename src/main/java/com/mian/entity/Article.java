@@ -11,7 +11,7 @@ import java.util.Date;
 
 /**
  * @Description: Article实体类
- * @Author Anmiho
+ * @Author mian
  * @Date 2020/12/14 22:58
  */
 @Document(indexName = "mian-blog",type = "article")

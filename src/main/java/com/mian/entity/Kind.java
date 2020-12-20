@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
  * @Description: Kind实体类
- * @Author Anmiho
+ * @Author mian
  * @Date 2020/12/14 23:11
  */
 public class Kind implements Serializable {

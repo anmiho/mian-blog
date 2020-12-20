@@ -5,7 +5,7 @@ import java.util.Date;
 
 /**
  * @Description: Admin实体类
- * @Author Anmiho
+ * @Author mian
  * @Date 2020/12/14 22:56
  */
 public class Admin implements Serializable {

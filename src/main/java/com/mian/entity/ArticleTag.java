@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
  * @Description: ArticleTag实体类
- * @Author Anmiho
+ * @Author mian
  * @Date 2020/12/14 23:10
  */
 public class ArticleTag implements Serializable {

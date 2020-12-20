@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
  * @Description: ArticleKind实体类
- * @Author Anmiho
+ * @Author mian
  * @Date 2020/12/14 23:05
  */
 public class ArticleKind implements Serializable {
