@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2020/12/23 18:35:40                          */
+/* Created on:     2020/12/23 18:45:02                          */
 /*==============================================================*/
 
 
@@ -65,7 +65,7 @@ create table article
    status               int(11) default NULL comment '文章状态。0：草稿，1：发布，2：回收站，3：加密',
    read_count           int(11) default NULL comment '阅读量',
    introduce            varchar(500) default NULL comment '文章介绍，引言',
-   img                  varchar(255) default 'https://gitee.com/cn_moti/moti-img/raw/master/other/6e1aceb77d1e4b5e91e390fd9e136bd7.jpg' comment '头图地址',
+   img                  varchar(255) default NULL comment '头图地址',
    primary key (id),
    key article_status (status),
    key article_read_count (read_count),
