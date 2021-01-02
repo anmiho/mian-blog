@@ -1,7 +1,7 @@
 package com.mian.service.impl;
 
 import com.mian.mapper.ArticleMapper;
-import com.mian.mapper.ArticleTagMapper;
+//import com.mian.mapper.ArticleTagMapper;
 import com.mian.mapper.TagMapper;
 
 import javax.annotation.Resource;
@@ -19,7 +19,7 @@ public class BaseService {
     @Resource
     protected TagMapper tagMapper;
 
-    @Resource
-    protected ArticleTagMapper articleTagMapper;
+//    @Resource
+//    protected ArticleTagMapper articleTagMapper;
 
 }

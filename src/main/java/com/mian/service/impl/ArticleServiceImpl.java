@@ -18,7 +18,7 @@ import java.util.List;
  * @Author mian
  * @Date 2020/12/31 16:13
  */
-@Service
+@Service("articleService")
 public class ArticleServiceImpl extends BaseService implements ArticleService {
     /**
      * @param article 实例对象
@@ -60,46 +60,47 @@ public class ArticleServiceImpl extends BaseService implements ArticleService {
      **/
     @Override
     public Integer publish(String title, String content, String tags, String kind, String introduce, Integer status) {
-        Article article = new Article();
-        article.setTitle(title);
-        article.setContent(content);
-        article.setStatus(status);
-        article.setComment(0);
-        article.setImg(ImageUtils.getRandomFace());
-        if (status != 0) {
-            article.setPublishTime(new Date());
-        }
-        article.setRecentEdit(new Date());
-        article.setReadCount(0);
-        if ("".equals(introduce)) {
-            // 摘要为空
-            introduce = content.length() > 100 ? content.substring(0, 100) : content;
-        }
-        article.setIntroduce(introduce);
-        articleMapper.insert(article);
-        // 处理输入的标签集合
-        if (!"".equals(tags)) {
-            List<Tag> tagList = dealTag(tags);
-            tagList.forEach(tag -> {
-                List<Tag> list = tagMapper.queryAll(tag);
-                if (list.size() == 0) {
-                    // 标签不存在,先添加标签在添加关联
-                    tag.setImg(ImageUtils.getRandomFace());
-                    tagMapper.insert(tag);
-                    articleTagMapper.insert(new ArticleTag(article.getId(), tag.getId()));
-                } else {
-                    // 标签已存在则添加数据到关联表
-                    articleTagMapper.insert(new ArticleTag(article.getId(), list.get(0).getId()));
-                }
-            });
-        }
-
-        // 处理获取到的文集
-        if (!"".equals(kind)) {
-            List<Kind> kinds = kindMapper.queryAll(new Kind(kind));
-            articleKindMapper.insert(new ArticleKind(article.getId(), kinds.get(0).getId()));
-        }
-        return article.getId();
+//        Article article = new Article();
+//        article.setTitle(title);
+//        article.setContent(content);
+//        article.setStatus(status);
+//        article.setComment(0);
+//        article.setImg(ImageUtils.getRandomFace());
+//        if (status != 0) {
+//            article.setPublishTime(new Date());
+//        }
+//        article.setRecentEdit(new Date());
+//        article.setReadCount(0);
+//        if ("".equals(introduce)) {
+//            // 摘要为空
+//            introduce = content.length() > 100 ? content.substring(0, 100) : content;
+//        }
+//        article.setIntroduce(introduce);
+//        articleMapper.insert(article);
+//        // 处理输入的标签集合
+//        if (!"".equals(tags)) {
+//            List<Tag> tagList = dealTag(tags);
+//            tagList.forEach(tag -> {
+//                List<Tag> list = tagMapper.queryAll(tag);
+//                if (list.size() == 0) {
+//                    // 标签不存在,先添加标签在添加关联
+//                    tag.setImg(ImageUtils.getRandomFace());
+//                    tagMapper.insert(tag);
+//                    articleTagMapper.insert(new ArticleTag(article.getId(), tag.getId()));
+//                } else {
+//                    // 标签已存在则添加数据到关联表
+//                    articleTagMapper.insert(new ArticleTag(article.getId(), list.get(0).getId()));
+//                }
+//            });
+//        }
+//
+//        // 处理获取到的文集
+//        if (!"".equals(kind)) {
+//            List<Kind> kinds = kindMapper.queryAll(new Kind(kind));
+//            articleKindMapper.insert(new ArticleKind(article.getId(), kinds.get(0).getId()));
+//        }
+//        return article.getId();
+        return 1;
     }
 
     @Override

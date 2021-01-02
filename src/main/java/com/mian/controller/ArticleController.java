@@ -6,7 +6,9 @@ import com.mian.entity.Article;
 import com.mian.utils.LogUtils;
 import org.slf4j.Logger;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @Description: 文章控制器
@@ -53,5 +55,14 @@ public class ArticleController extends BaseController {
 //        rabbitTemplate.convertAndSend("es","article.save", id);
 //        redisService.incr(ArticleKey.getEsCount,"");
         return JSONObject.toJSONString(result);
+    }
+
+    /**
+     * 文章发布
+     */
+    @GetMapping("/login")
+    public String login() {
+
+        return "login";
     }
 }
