@@ -1,8 +1,10 @@
 package com.mian.service.impl;
 
-import com.mian.mapper.ArticleMapper;
-//import com.mian.mapper.ArticleTagMapper;
+import com.mian.mapper.*;
 import com.mian.mapper.TagMapper;
+import com.mian.redis.RedisService;
+import org.elasticsearch.client.RestHighLevelClient;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.annotation.Resource;
 
@@ -14,12 +16,42 @@ import javax.annotation.Resource;
 public class BaseService {
 
     @Resource
+    protected AdminMapper adminMapper;
+
+    @Resource
     protected ArticleMapper articleMapper;
 
     @Resource
     protected TagMapper tagMapper;
 
 //    @Resource
-//    protected ArticleTagMapper articleTagMapper;
+//    protected CommentMapper commentMapper;
+//
+//    @Resource
+//    protected MenuMapper menuMapper;
+//
+//    @Resource
+//    protected LinkMapper linkMapper;
+//
+    @Resource
+    protected KindMapper kindMapper;
+
+    @Resource
+    protected ArticleKindMapper articleKindMapper;
+
+    @Resource
+    protected ArticleTagMapper articleTagMapper;
+//
+//    @Resource
+//    protected FrontMapper frontMapper;
+//
+//    @Resource
+//    protected StatisticsMapper statisticsMapper;
+//
+    @Autowired
+    protected RedisService redisService;
+
+//    @Autowired
+//    protected RestHighLevelClient client;
 
 }

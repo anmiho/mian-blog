@@ -7,7 +7,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * @Description: Admin服务接口
+ * @Description: Article服务接口
  * @Author mian
  * @Date 2020/12/31 16:16
  */

@@ -125,7 +125,7 @@
 
     <!--删除全部回收站文章-->
     <delete id="deleteTrash">
-        delete from articlewhere status = 2
+        delete from article where status = 2
     </delete>
 
     <!--查询单个article-->
