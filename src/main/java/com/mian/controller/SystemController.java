@@ -26,93 +26,93 @@ public class SystemController extends BaseController {
     @GetMapping({"/", "/index"})
     public String index(Map<String, Object> map, Integer page) {
         logger.warn("请求【前台主页】");
-//        // 获取已发布的文章数量
-//        Integer totalCount = articleService.totalCount(1);
-//        Integer totalPage = (int)Math.ceil(totalCount/10+0.5);
-//        // 处理page参数
-//        if (ObjectUtils.isEmpty(page)) {
-//            page = 1;
-//        }else if (page < 1 || page > totalPage){
-//            return "error/401";
-//        }
-//        // 更新/新增 访问数据
-//        statisticsService.update(request,-1);
-//        // 获取主页的10篇文章
-//        List<Article> articles = articleService.orderByPublishTime(page);
-//        // 获取所有标签
-//        List<Tag> tags =  tags = tagService.queryAll();
-//        // 获取所有的文集
-//        List<Kind> kinds = kindService.queryAll();
-//        // 获取阅读量最高的10篇文章
-//        List<Article> famousArticles = articleService.orderByReadCount();
-//        // 获取日期归档
-//        List<ArticleDateArchive> archives = articleService.getArchive();
-//        // 获取友情链接
-//        List<Link> links = linkService.queryAll();
-//        // 获取左侧菜单
-//        List<Menu> leftMenus = menuService.getLeftMenus();
-//        // 获取右侧菜单
-//        List<Menu> rightMenus = menuService.getRightMenus();
-//
-//        map.put("articles",articles);
-//        map.put("user",user);
-//        map.put("front",front);
-//        map.put("famousArticles",famousArticles);
-//        map.put("tags",tags);
-//        map.put("kinds",kinds);
-//        map.put("archives", archives);
-//        map.put("leftMenus",leftMenus);
-//        map.put("rightMenus",rightMenus);
-//        map.put("links",links);
-//        map.put("page",page);
-//        map.put("totalPage",totalPage);
+        // 获取已发布的文章数量
+        Integer totalCount = articleService.totalCount(1);
+        Integer totalPage = (int) Math.ceil(totalCount / 10 + 0.5);
+        // 处理page参数
+        if (ObjectUtils.isEmpty(page)) {
+            page = 1;
+        } else if (page < 1 || page > totalPage) {
+            return "error/401";
+        }
+        // 更新/新增 访问数据
+        statisticsService.update(request, -1);
+        // 获取主页的10篇文章
+        List<Article> articles = articleService.orderByPublishTime(page);
+        // 获取所有标签
+        List<Tag> tags = tags = tagService.queryAll();
+        // 获取所有的文集
+        List<Kind> kinds = kindService.queryAll();
+        // 获取阅读量最高的10篇文章
+        List<Article> famousArticles = articleService.orderByReadCount();
+        // 获取日期归档
+        List<ArticleDateArchive> archives = articleService.getArchive();
+        // 获取友情链接
+        List<Link> links = linkService.queryAll();
+        // 获取左侧菜单
+        List<Menu> leftMenus = menuService.getLeftMenus();
+        // 获取右侧菜单
+        List<Menu> rightMenus = menuService.getRightMenus();
+
+        map.put("articles", articles);
+        map.put("user", user);
+        map.put("front", front);
+        map.put("famousArticles", famousArticles);
+        map.put("tags", tags);
+        map.put("kinds", kinds);
+        map.put("archives", archives);
+        map.put("leftMenus", leftMenus);
+        map.put("rightMenus", rightMenus);
+        map.put("links", links);
+        map.put("page", page);
+        map.put("totalPage", totalPage);
         return "front/index";
     }
 
-//    /**
-//     * 前往 阅读文章页面
-//     */
-//    @GetMapping("/article")
-//    public String article(@RequestParam("id") Integer id, Map<String,Object> map){
-//        logger.warn("请求【阅读文章】页面，ID为 "+id);
-//        // 获取指定的文章
-//        Article article = articleService.queryById(id);
-//        if (article == null){
-//            logger.warn("【失败】文章不存在，返回404页面");
-//            return "error/404";
-//        }
-//        if (article.getStatus() == 3 && loginAdmin == null){
-//            logger.warn("【失败】无权限访问，返回401页面");
-//            return "error/401";
-//        }
-//        // 更新/新增 访问数据
-//        statisticsService.update(request,id);
-//        // 更新阅读量
-//        articleService.addReadCount(id);
-//        // 获取阅读量
-//        Integer readCount = articleService.getReadCount(id);
-//        // 获取所有标签
-//        List<Tag> tags = tagService.queryAll();
-//        // 获取所有文集
-//        List<Kind> kinds = kindService.queryAll();
-//        // 获取阅读量最高的10篇文章
-//        List<Article> famousArticles = articleService.orderByReadCount();
-//        // 获取日期归档
-//        List<ArticleDateArchive> archives = articleService.getArchive();
-//        // 获取所有的评论
-//        List<Comment> comments = commentService.queryByArticleIdAndType(id, 0);
-//
-//        map.put("front",front);
-//        map.put("famousArticles",famousArticles);
-//        map.put("tags",tags);
-//        map.put("kinds",kinds);
-//        map.put("archives", archives);
-//        map.put("article",article);
-//        map.put("user",user);
-//        map.put("comments",comments);
-//        map.put("readCount",readCount);
-//        return "front/article";
-//    }
+    /**
+     * 前往 阅读文章页面
+     */
+    @GetMapping("/article")
+    public String article(@RequestParam("id") Integer id, Map<String, Object> map) {
+        logger.warn("请求【阅读文章】页面，ID为 " + id);
+        // 获取指定的文章
+        Article article = articleService.queryById(id);
+        if (article == null) {
+            logger.warn("【失败】文章不存在，返回404页面");
+            return "error/404";
+        }
+        if (article.getStatus() == 3 && loginAdmin == null) {
+            logger.warn("【失败】无权限访问，返回401页面");
+            return "error/401";
+        }
+        // 更新/新增 访问数据
+        statisticsService.update(request, id);
+        // 更新阅读量
+        articleService.addReadCount(id);
+        // 获取阅读量
+        Integer readCount = articleService.getReadCount(id);
+        // 获取所有标签
+        List<Tag> tags = tagService.queryAll();
+        // 获取所有文集
+        List<Kind> kinds = kindService.queryAll();
+        // 获取阅读量最高的10篇文章
+        List<Article> famousArticles = articleService.orderByReadCount();
+        // 获取日期归档
+        List<ArticleDateArchive> archives = articleService.getArchive();
+        // 获取所有的评论
+        List<Comment> comments = commentService.queryByArticleIdAndType(id, 0);
+
+        map.put("front", front);
+        map.put("famousArticles", famousArticles);
+        map.put("tags", tags);
+        map.put("kinds", kinds);
+        map.put("archives", archives);
+        map.put("article", article);
+        map.put("user", user);
+        map.put("comments", comments);
+        map.put("readCount", readCount);
+        return "front/article";
+    }
 //
 //    /**
 //     * 前往 搜索文章页面
@@ -155,11 +155,12 @@ public class SystemController extends BaseController {
 //        return "front/search";
 //    }
 //
+
     /**
      * 前往 后台仪表盘页面
      */
     @GetMapping("/dashboard")
-    public String dashboard(Map<String,Object> map){
+    public String dashboard(Map<String, Object> map) {
         logger.warn("请求【后台仪表盘】页面");
 //        // 获取各个状态下文章的数量
 //        Map<String, Integer> countMap = statusCount();

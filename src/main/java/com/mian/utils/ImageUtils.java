@@ -25,18 +25,18 @@ public class ImageUtils {
         String trueFileName = file.getOriginalFilename();
         assert trueFileName != null;
         String suffix = trueFileName.substring(trueFileName.lastIndexOf("."));
-
         String fileName = IdUtil.simpleUUID() + suffix;
         String paramImgFile = Base64.encode(file.getBytes());
-        //转存到gitee
+
+        // 转存到Gitee图床仓库
         Map<String, Object> paramMap = new HashMap<>();
         paramMap.put("access_token", GiteeImgBedConfig.ACCESS_TOKEN);
         paramMap.put("message", GiteeImgBedConfig.CREATE_REPOS_MESSAGE);
         paramMap.put("content", paramImgFile);
 
         String targetDir = "";
-
         if ("a".equals(flag)){
+
             targetDir = GiteeImgBedConfig.IMG_FILE_DEST_PATH + fileName;
         }else {
             targetDir = "other/" + fileName;

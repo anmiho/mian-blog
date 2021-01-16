@@ -11,9 +11,9 @@ import java.util.Date;
  */
 public interface GiteeImgBedConfig {
     /**
-     * 码云分配的私人令牌Token
+     * 码云分配的私人令牌Token：b5595013e4121b9f594f2eab7d8702c1
      */
-    String ACCESS_TOKEN = "fbb481149cb983ffd292dc1b936b0f25";
+    String ACCESS_TOKEN = "b5595013e4121b9f594f2eab7d8702c1";
 
     /**
      * 码云用户名

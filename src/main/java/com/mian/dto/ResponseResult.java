@@ -2,6 +2,7 @@ package com.mian.dto;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 /**
  * @Description: 返回结果
@@ -10,6 +11,7 @@ import lombok.NoArgsConstructor;
  */
 @Data
 @NoArgsConstructor
+@ToString
 public class ResponseResult {
     private int code;
     private String message;

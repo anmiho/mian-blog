@@ -24,15 +24,15 @@ public class BaseService {
     @Resource
     protected TagMapper tagMapper;
 
-//    @Resource
-//    protected CommentMapper commentMapper;
-//
-//    @Resource
-//    protected MenuMapper menuMapper;
-//
-//    @Resource
-//    protected LinkMapper linkMapper;
-//
+    @Resource
+    protected CommentMapper commentMapper;
+
+    @Resource
+    protected MenuMapper menuMapper;
+
+    @Resource
+    protected LinkMapper linkMapper;
+
     @Resource
     protected KindMapper kindMapper;
 
@@ -41,13 +41,13 @@ public class BaseService {
 
     @Resource
     protected ArticleTagMapper articleTagMapper;
-//
-//    @Resource
-//    protected FrontMapper frontMapper;
-//
-//    @Resource
-//    protected StatisticsMapper statisticsMapper;
-//
+
+    @Resource
+    protected FrontMapper frontMapper;
+
+    @Resource
+    protected StatisticsMapper statisticsMapper;
+
     @Autowired
     protected RedisService redisService;
 
