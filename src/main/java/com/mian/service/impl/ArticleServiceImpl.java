@@ -472,7 +472,7 @@ public class ArticleServiceImpl extends BaseService implements ArticleService {
         articles.forEach(article -> {
             // 获取该文章的分类
             Kind kinds = articleKindMapper.queryByArticleId(article.getId());
-            // 获取该文章的分类
+            // 获取该文章的标签
             List<Tag> tags = articleTagMapper.queryByArticleId(article.getId());
             article.setKinds(kinds);
             article.setTags(tags);

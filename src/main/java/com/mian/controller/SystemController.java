@@ -160,282 +160,282 @@ public class SystemController extends BaseController {
      * 前往 后台仪表盘页面
      */
     @GetMapping("/dashboard")
-    public String dashboard(Map<String, Object> map) {
+    public String dashboard(Map<String,Object> map){
         logger.warn("请求【后台仪表盘】页面");
-//        // 获取各个状态下文章的数量
-//        Map<String, Integer> countMap = statusCount();
-//        // 获取发布文章数
-//        map.put("publishCount",countMap.get("publish"));
-//        // 获取草稿数
-//        map.put("draftCount",countMap.get("draft"));
-//        // 获取回收站数
-//        map.put("trashCount",countMap.get("trash"));
-//        // 获取评论数
-//        map.put("commentCount",commentService.getCount());
-//        // 获取文集数
-//        map.put("kindCount",kindService.getCount());
-//        // 获取标签数
-//        map.put("tagCount",tagService.getCount());
-//        // 获取统计信息
-//        map.put("statistics",statisticsService.getVisitStatistics());
-//        // 获取统计数量信息
-//        map.put("statisticsCount",statisticsService.getStatisticsCount());
-//        // 获取未读评论数
-//        map.put("unRead",commentService.getUnReadCount());
+        // 获取各个状态下文章的数量
+        Map<String, Integer> countMap = statusCount();
+        // 获取发布文章数
+        map.put("publishCount",countMap.get("publish"));
+        // 获取草稿数
+        map.put("draftCount",countMap.get("draft"));
+        // 获取回收站数
+        map.put("trashCount",countMap.get("trash"));
+        // 获取评论数
+        map.put("commentCount",commentService.getCount());
+        // 获取文集数
+        map.put("kindCount",kindService.getCount());
+        // 获取标签数
+        map.put("tagCount",tagService.getCount());
+        // 获取统计信息
+        map.put("statistics",statisticsService.getVisitStatistics());
+        // 获取统计数量信息
+        map.put("statisticsCount",statisticsService.getStatisticsCount());
+        // 获取未读评论数
+        map.put("unRead",commentService.getUnReadCount());
         return "admin/dashboard";
     }
-//
-//    /**
-//     * 前往 我的资料页面
-//     */
-//    @GetMapping("/profile")
-//    public String profile(Map<String,Object> map){
-//        logger.warn("请求【我的资料】页面");
-//        // 获取未读评论数
-//        map.put("unRead",commentService.getUnReadCount());
-//        return "admin/profile";
-//    }
-//
-//    /**
-//     * 前往 所有文章页面
-//     */
-//    @GetMapping("/articles")
-//    public String articles(Map<String,Object> map,String type){
-//        List<Article> articles = new ArrayList<>();
-//        type = type == null ? "publish" : type;
-//        if ("publish".equals(type)){
-//            logger.warn("请求【已发表文章】页面");
-//            articles = articleService.queryByStatus(1);
-//        } else if ("draft".equals(type)){
-//            logger.warn("请求【草稿文章】页面");
-//            articles = articleService.queryByStatus(0);
-//        }else if ("trash".equals(type)){
-//            logger.warn("请求【回收站】页面");
-//            articles = articleService.queryByStatus(2);
-//        }else {
-//            return "error/400";
-//        }
-//        map.put("articles",articles);
-//        // 获取未读评论数
-//        map.put("unRead",commentService.getUnReadCount());
-//        // 获取各个状态下文章的数量
-//        map.put("statusCount",statusCount());
-//        return "admin/"+type;
-//    }
-//
-//    /**
-//     * 前往 写文章/编辑文章页面
-//     */
-//    @GetMapping("/edit")
-//    public String edit(Map<String,Object> map,Integer id){
-//        // 获取全部的文集
-//        List<Kind> kinds = kindService.queryAll();
-//        map.put("kinds",kinds);
-//        if (id == null){
-//            logger.warn("请求【写文章】页面");
-//            return "admin/new";
-//        }else {
-//            logger.warn("请求【编辑文章】页面，ID："+id);
-//            // 获取文章对象
-//            Article article = articleService.queryById(id);
-//            // 获取文章的文集
-//            Kind kind = kindService.queryByArticleId(id);
-//            // 获取并处理文章的标签
-//            List<Tag> tags = tagService.queryByArticleId(id);
-//            StringBuilder tag = new StringBuilder(";");
-//            tags.forEach(temp -> {
-//                tag.append(temp.getName()+";");
-//            });
-//            map.put("article",article);
-//            map.put("kind",kind);
-//            map.put("tag",tag.toString());
-//            // 获取未读评论数
-//            map.put("unRead",commentService.getUnReadCount());
-//            return "admin/edit";
-//        }
-//    }
-//
-//    /**
-//     * 前往 文集页面
-//     */
-//    @GetMapping("/kinds")
-//    public String kinds(Map<String,Object> map){
-//        logger.warn("请求【所有文集】页面");
-//        // 获取所有的文集
-//        List<Kind> kinds = kindService.queryAll();
-//        // 设置每个文集的文章数
-//        kinds.forEach(kind -> {
-//            kind.setArticleCount(kindService.getArticleCount(kind.getId()));
-//        });
-//        map.put("kinds",kinds);
-//        // 获取未读评论数
-//        map.put("unRead",commentService.getUnReadCount());
-//        return "admin/kinds";
-//    }
-//
-//    /**
-//     * 前往 编辑文集页面
-//     */
-//    @GetMapping("/kind")
-//    public String kind(Map<String,Object> map,Integer id){
-//        logger.warn("请求【编辑文集】页面");
-//        // 如果id为空那么重定向到所有文集页面
-//        if (id == null){
-//            return "redirect:/kinds";
-//        }
-//        // 获取此文集
-//        Kind kind = kindService.queryById(id);
-//        if (kind == null){
-//            return "redirect:/kinds";
-//        }
-//        map.put("kind",kind);
-//        // 获取未读评论数
-//        map.put("unRead",commentService.getUnReadCount());
-//        return "admin/kind";
-//    }
-//
-//    /**
-//     * 前往 所有标签页面
-//     */
-//    @GetMapping("/tags")
-//    public String tags(Map<String,Object> map){
-//        logger.warn("请求【所有标签】页面");
-//        // 获取所有的标签
-//        List<Tag> tags = tagService.queryAll();
-//        // 设置每个标签的文章数
-//        tags.forEach(tag -> {
-//            tag.setArticleCount(tagService.getArticleCount(tag.getId()));
-//        });
-//        map.put("tags",tags);
-//        // 获取未读评论数
-//        map.put("unRead",commentService.getUnReadCount());
-//        return "admin/tags";
-//    }
-//
-//    /**
-//     * 前往 编辑标签页面
-//     */
-//    @GetMapping("/tag")
-//    public String tag(Map<String,Object> map,Integer id){
-//        logger.warn("请求【编辑标签】页面");
-//        // 如果id为空那么重定向到所有标签页面
-//        if (id == null){
-//            return "redirect:/tags";
-//        }
-//        // 获取此标签
-//        Tag tag = tagService.queryById(id);
-//        if (tag == null){
-//            return "redirect:/tags";
-//        }
-//        map.put("tag",tag);
-//        // 获取未读评论数
-//        map.put("unRead",commentService.getUnReadCount());
-//        return "admin/tag";
-//    }
-//
-//    /**
-//     * 前往 所有评论页面
-//     */
-//    @GetMapping("/comments")
-//    public String comments(Map<String,Object> map){
-//        logger.warn("请求【所有评论】页面");
-//        Comment comment = new Comment();
-//        comment.setType(0);
-//        List<Comment> comments = commentService.queryAll(comment);
-//        comments.forEach(temp -> {
-//            temp.setTitle(articleService.getTitle(temp.getArticleId()));
-//        });
-//        map.put("comments",comments);
-//        // 获取未读评论数
-//        map.put("unRead",commentService.getUnReadCount());
-//        return "admin/comments";
-//    }
-//
-//    /**
-//     * 前往 阅读评论页面
-//     */
-//    @GetMapping("/comment")
-//    public String comment(Map<String,Object> map,@RequestParam("id") Integer id){
-//        logger.warn("请求【阅读评论】页面");
-//        Comment comment = commentService.queryById(id);
-//        comment.setStatus(1);
-//        commentService.update(comment);
-//        map.put("comment",comment);
-//        // 获取未读评论数
-//        map.put("unRead",commentService.getUnReadCount());
-//        return "admin/comment";
-//    }
-//
-//    /**
-//     * 前往 后台-外观-主页
-//     */
-//    @GetMapping("/front")
-//    public String front(Map<String,Object> map){
-//        logger.warn("请求【后台-外观-主页】页面");
-//        map.put("front",front);
-//        // 获取未读评论数
-//        map.put("unRead",commentService.getUnReadCount());
-//        return "admin/front";
-//    }
-//
-//    /**
-//     * 前往 后台-外观-菜单
-//     */
-//    @GetMapping("/menu")
-//    public String menu(Map<String,Object> map){
-//        logger.warn("请求【后台-外观-菜单】页面");
-//        // 获取全部菜单
-//        List<Menu> menus = menuService.queryAll();
-//        map.put("menus",menus);
-//        // 获取未读评论数
-//        map.put("unRead",commentService.getUnReadCount());
-//        return "admin/menu";
-//    }
-//
-//    /**
-//     * 前往 后台-外观-友情链接
-//     */
-//    @GetMapping("/link")
-//    public String link(Map<String,Object> map){
-//        logger.warn("请求【后台-外观-友情链接】页面");
-//        // 获取全部菜单
-//        List<Link> links = linkService.queryAll();
-//        map.put("links",links);
-//        // 获取未读评论数
-//        map.put("unRead",commentService.getUnReadCount());
-//        return "admin/link";
-//    }
-//
-//    /**
-//     * 前往 后台-统计
-//     */
-//    @GetMapping("/statistics")
-//    public String statistics(Map<String,Object> map){
-//        logger.warn("请求【后台-统计】页面");
-//        // 获取统计信息
-//        map.put("statistics",statisticsService.getVisitStatistics());
-//        // 获取所有访客信息
-//        map.put("visitors",statisticsService.getVisitorStatistics());
-//        // 获取统计数量信息
-//        map.put("statisticsCount",statisticsService.getStatisticsCount());
-//        // 获取未读评论数
-//        map.put("unRead",commentService.getUnReadCount());
-//        return "admin/statistics";
-//    }
-//
-//    /**
-//     * 获取各种状态下文章的数量
-//     */
-//    public Map<String,Integer> statusCount(){
-//        Map<String,Integer> map = new HashMap<>();
-//        Integer draft = articleService.totalCount(0);
-//        Integer publish = articleService.totalCount(1);
-//        Integer trash = articleService.totalCount(2);
-//        map.put("draft",draft);
-//        map.put("publish",publish);
-//        map.put("trash",trash);
-//        logger.warn("获取各种状态下文章的数量:"+map);
-//        return map;
-//    }
+
+    /**
+     * 前往 我的资料页面
+     */
+    @GetMapping("/profile")
+    public String profile(Map<String, Object> map) {
+        logger.warn("请求【我的资料】页面");
+        // 获取未读评论数
+        map.put("unRead", commentService.getUnReadCount());
+        return "admin/profile";
+    }
+
+    /**
+     * 前往 所有文章页面
+     */
+    @GetMapping("/articles")
+    public String articles(Map<String, Object> map, String type) {
+        List<Article> articles = new ArrayList<>();
+        type = type == null ? "publish" : type;
+        if ("publish".equals(type)) {
+            logger.warn("请求【已发表文章】页面");
+            articles = articleService.queryByStatus(1);
+        } else if ("draft".equals(type)) {
+            logger.warn("请求【草稿文章】页面");
+            articles = articleService.queryByStatus(0);
+        } else if ("trash".equals(type)) {
+            logger.warn("请求【回收站】页面");
+            articles = articleService.queryByStatus(2);
+        } else {
+            return "error/400";
+        }
+        map.put("articles", articles);
+        // 获取未读评论数
+        map.put("unRead", commentService.getUnReadCount());
+        // 获取各个状态下文章的数量
+        map.put("statusCount", statusCount());
+        return "admin/" + type;
+    }
+
+    /**
+     * 前往 写文章/编辑文章页面
+     */
+    @GetMapping("/edit")
+    public String edit(Map<String, Object> map, Integer id) {
+        // 获取全部的文集
+        List<Kind> kinds = kindService.queryAll();
+        map.put("kinds", kinds);
+        if (id == null) {
+            logger.warn("请求【写文章】页面");
+            return "admin/new";
+        } else {
+            logger.warn("请求【编辑文章】页面，ID：" + id);
+            // 获取文章对象
+            Article article = articleService.queryById(id);
+            // 获取文章的文集
+            Kind kind = kindService.queryByArticleId(id);
+            // 获取并处理文章的标签
+            List<Tag> tags = tagService.queryByArticleId(id);
+            StringBuilder tag = new StringBuilder(";");
+            tags.forEach(temp -> {
+                tag.append(temp.getName() + ";");
+            });
+            map.put("article", article);
+            map.put("kind", kind);
+            map.put("tag", tag.toString());
+            // 获取未读评论数
+            map.put("unRead", commentService.getUnReadCount());
+            return "admin/edit";
+        }
+    }
+
+    /**
+     * 前往 文集页面
+     */
+    @GetMapping("/kinds")
+    public String kinds(Map<String, Object> map) {
+        logger.warn("请求【所有文集】页面");
+        // 获取所有的文集
+        List<Kind> kinds = kindService.queryAll();
+        // 设置每个文集的文章数
+        kinds.forEach(kind -> {
+            kind.setArticleCount(kindService.getArticleCount(kind.getId()));
+        });
+        map.put("kinds", kinds);
+        // 获取未读评论数
+        map.put("unRead", commentService.getUnReadCount());
+        return "admin/kinds";
+    }
+
+    /**
+     * 前往 编辑文集页面
+     */
+    @GetMapping("/kind")
+    public String kind(Map<String, Object> map, Integer id) {
+        logger.warn("请求【编辑文集】页面");
+        // 如果id为空那么重定向到所有文集页面
+        if (id == null) {
+            return "redirect:/kinds";
+        }
+        // 获取此文集
+        Kind kind = kindService.queryById(id);
+        if (kind == null) {
+            return "redirect:/kinds";
+        }
+        map.put("kind", kind);
+        // 获取未读评论数
+        map.put("unRead", commentService.getUnReadCount());
+        return "admin/kind";
+    }
+
+    /**
+     * 前往 所有标签页面
+     */
+    @GetMapping("/tags")
+    public String tags(Map<String, Object> map) {
+        logger.warn("请求【所有标签】页面");
+        // 获取所有的标签
+        List<Tag> tags = tagService.queryAll();
+        // 设置每个标签的文章数
+        tags.forEach(tag -> {
+            tag.setArticleCount(tagService.getArticleCount(tag.getId()));
+        });
+        map.put("tags", tags);
+        // 获取未读评论数
+        map.put("unRead", commentService.getUnReadCount());
+        return "admin/tags";
+    }
+
+    /**
+     * 前往 编辑标签页面
+     */
+    @GetMapping("/tag")
+    public String tag(Map<String, Object> map, Integer id) {
+        logger.warn("请求【编辑标签】页面");
+        // 如果id为空那么重定向到所有标签页面
+        if (id == null) {
+            return "redirect:/tags";
+        }
+        // 获取此标签
+        Tag tag = tagService.queryById(id);
+        if (tag == null) {
+            return "redirect:/tags";
+        }
+        map.put("tag", tag);
+        // 获取未读评论数
+        map.put("unRead", commentService.getUnReadCount());
+        return "admin/tag";
+    }
+
+    /**
+     * 前往 所有评论页面
+     */
+    @GetMapping("/comments")
+    public String comments(Map<String, Object> map) {
+        logger.warn("请求【所有评论】页面");
+        Comment comment = new Comment();
+        comment.setType(0);
+        List<Comment> comments = commentService.queryAll(comment);
+        comments.forEach(temp -> {
+            temp.setTitle(articleService.getTitle(temp.getArticleId()));
+        });
+        map.put("comments", comments);
+        // 获取未读评论数
+        map.put("unRead", commentService.getUnReadCount());
+        return "admin/comments";
+    }
+
+    /**
+     * 前往 阅读评论页面
+     */
+    @GetMapping("/comment")
+    public String comment(Map<String, Object> map, @RequestParam("id") Integer id) {
+        logger.warn("请求【阅读评论】页面");
+        Comment comment = commentService.queryById(id);
+        comment.setStatus(1);
+        commentService.update(comment);
+        map.put("comment", comment);
+        // 获取未读评论数
+        map.put("unRead", commentService.getUnReadCount());
+        return "admin/comment";
+    }
+
+    /**
+     * 前往 后台-外观-主页
+     */
+    @GetMapping("/front")
+    public String front(Map<String, Object> map) {
+        logger.warn("请求【后台-外观-主页】页面");
+        map.put("front", front);
+        // 获取未读评论数
+        map.put("unRead", commentService.getUnReadCount());
+        return "admin/front";
+    }
+
+    /**
+     * 前往 后台-外观-菜单
+     */
+    @GetMapping("/menu")
+    public String menu(Map<String, Object> map) {
+        logger.warn("请求【后台-外观-菜单】页面");
+        // 获取全部菜单
+        List<Menu> menus = menuService.queryAll();
+        map.put("menus", menus);
+        // 获取未读评论数
+        map.put("unRead", commentService.getUnReadCount());
+        return "admin/menu";
+    }
+
+    /**
+     * 前往 后台-外观-友情链接
+     */
+    @GetMapping("/link")
+    public String link(Map<String, Object> map) {
+        logger.warn("请求【后台-外观-友情链接】页面");
+        // 获取全部菜单
+        List<Link> links = linkService.queryAll();
+        map.put("links", links);
+        // 获取未读评论数
+        map.put("unRead", commentService.getUnReadCount());
+        return "admin/link";
+    }
+
+    /**
+     * 前往 后台-统计
+     */
+    @GetMapping("/statistics")
+    public String statistics(Map<String, Object> map) {
+        logger.warn("请求【后台-统计】页面");
+        // 获取统计信息
+        map.put("statistics", statisticsService.getVisitStatistics());
+        // 获取所有访客信息
+        map.put("visitors", statisticsService.getVisitorStatistics());
+        // 获取统计数量信息
+        map.put("statisticsCount", statisticsService.getStatisticsCount());
+        // 获取未读评论数
+        map.put("unRead", commentService.getUnReadCount());
+        return "admin/statistics";
+    }
+
+    /**
+     * 获取各种状态下文章的数量
+     */
+    public Map<String, Integer> statusCount() {
+        Map<String, Integer> map = new HashMap<>();
+        Integer draft = articleService.totalCount(0);
+        Integer publish = articleService.totalCount(1);
+        Integer trash = articleService.totalCount(2);
+        map.put("draft", draft);
+        map.put("publish", publish);
+        map.put("trash", trash);
+        logger.warn("获取各种状态下文章的数量:" + map);
+        return map;
+    }
 
 }

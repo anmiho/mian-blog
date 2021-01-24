@@ -23,17 +23,22 @@ public class MvcConfig implements WebMvcConfigurer, ErrorPageRegistrar {
      */
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
+//        registry.addInterceptor(new LoginHandlerInterceptor())
+//                // 拦截的请求
+//                .addPathPatterns("/**")
+//                // 放行的请求
+//                .excludePathPatterns(
+//                        "/", "/index", "/admin", "/admin/test",
+//                        "/admin-login", "/login", "/loginByQQ", "/connection",
+//                        "/error400Page", "/error401Page", "/error404Page", "/error500Page",
+//                        "/article", "/getMoreArticles", "/search", "/addComment"
+//                        , "/asserts/**", "/**/*.css", "/**/*.js", "/**/*.png ", "/**/*.jpg"
+//                        , "/**/*.jpeg", "/**/*.gif", "/**/fonts/*", "/**/*.svg","/dashboard");
+
+        // 开发中将全部路径放行，上线后改为以上注释掉的部分
         registry.addInterceptor(new LoginHandlerInterceptor())
-                // 拦截的请求
-                .addPathPatterns("/**")
                 // 放行的请求
-                .excludePathPatterns(
-                        "/", "/index", "/admin", "/admin/test",
-                        "/admin-login", "/login", "/loginByQQ", "/connection",
-                        "/error400Page", "/error401Page", "/error404Page", "/error500Page",
-                        "/article", "/getMoreArticles", "/search", "/addComment"
-                        , "/asserts/**", "/**/*.css", "/**/*.js", "/**/*.png ", "/**/*.jpg"
-                        , "/**/*.jpeg", "/**/*.gif", "/**/fonts/*", "/**/*.svg","/password","/image/upload");
+                .excludePathPatterns("/**");
     }
 
     /**

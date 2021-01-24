@@ -65,10 +65,10 @@ public class LoginController extends BaseController {
         // 进行判断
         if (admin.getName().equals(name) && admin.getPassword().equals(md5.digestHex16(password))) {
             result.setCode(200);
-            logger.warn("【成功】密码登录");
             admin.setRecentLogin(new Date());
             adminService.update(admin);
             session.setAttribute("admin", admin);
+            logger.warn("【成功】密码登录");
         } else {
             result.setCode(100);
             logger.warn("【错误】密码登录，用户名或密码错误");

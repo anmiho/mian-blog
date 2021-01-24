@@ -60,11 +60,11 @@ public class ImageUtils {
      */
     public static String getRandomImg(){
         String[] imgs = {
-                "https://gitee.com/cn_moti/moti-img/raw/master/other/f64e8aef0fad4026b6f24ecf40b55bd8.jpg",
-                "https://gitee.com/cn_moti/moti-img/raw/master/other/b040ec7facf44a10a9b34c401956d219.jpg",
-                "https://gitee.com/cn_moti/moti-img/raw/master/other/81f3db577a1842e4aef298dec5339472.jpg",
-                "https://gitee.com/cn_moti/moti-img/raw/master/other/771ba241fe164ea0a1a1a17068c69ab4.jpg",
-                "https://gitee.com/cn_moti/moti-img/raw/master/other/fa962e4d45e04dda9c90afcb8e4ff46e.jpg"};
+                "https://gitee.com/anmiho/blog-images/raw/master/other/377bc6ea369e476abec86a239764e205.jpg",
+                "https://gitee.com/anmiho/blog-images/raw/master/other/02d8bf90255944e19605fdd9520a2207.jpg",
+                "https://gitee.com/anmiho/blog-images/raw/master/other/3b4981dd486544b1943a691f237aed5b.jpg",
+                "https://gitee.com/anmiho/blog-images/raw/master/other/fc92f46217714dbba748b381e7c272c5.jpg",
+                "https://gitee.com/anmiho/blog-images/raw/master/other/d16ab6a0fd6343eb96fda27574abcdab.jpg"};
         return imgs[(int) (Math.random() * 5)];
     }
 
@@ -73,14 +73,13 @@ public class ImageUtils {
      */
     public static String getRandomFace(){
         String[] imgs = {
-                "https://gitee.com/cn_moti/moti-img/raw/master/other/9c5ae1c46f5d4bc2b62423ce20fb060d.png",
-                "https://gitee.com/cn_moti/moti-img/raw/master/other/8b11eb7e6311402098beb55845d2ce6a.jpg",
-                "https://gitee.com/cn_moti/moti-img/raw/master/other/213bb80e420d42048c38716568213b29.png",
-                "https://gitee.com/cn_moti/moti-img/raw/master/other/8d56dd882b32466d80922c63c100cf3a.png",
-                "https://gitee.com/cn_moti/moti-img/raw/master/other/d4eef3844c3643d08e4d4bc1cb41e508.jpg",
-                "https://gitee.com/cn_moti/moti-img/raw/master/other/00b2ddd16bc94db2a4d54df17fc146a1.jpg",
-                "https://gitee.com/cn_moti/moti-img/raw/master/other/732916df51924cb7bb0566afd42d9965.jpg",
-                "https://gitee.com/cn_moti/moti-img/raw/master/other/43ff1d5db66e49a48e4b75ad18b3f888.jpg"
+                "https://gitee.com/anmiho/blog-images/raw/master/other/0dd8d71fb8de4fe2944c006d08240fc9.jpg",
+                "https://gitee.com/anmiho/blog-images/raw/master/other/735ffcef4a1e41fcbb1b292d347ea83a.jpg",
+                "https://gitee.com/anmiho/blog-images/raw/master/other/f9c56debcb4d455e96703fadf431bb4e.jpg",
+                "https://gitee.com/anmiho/blog-images/raw/master/other/35ab1dc8a516434eb9856084cc43ae7a.jpg",
+                "https://gitee.com/anmiho/blog-images/raw/master/other/2f94a9400d7a49f1af56f4b4c89158d5.jpg",
+                "https://gitee.com/anmiho/blog-images/raw/master/other/aab5527fc1b140cbafe33b776d3e28ef.jpg",
+                "https://gitee.com/anmiho/blog-images/raw/master/other/35d35ecb2cd446c4877f01627e74d0bf.jpg"
 
         };
         return imgs[(int) (Math.random() * 8)];

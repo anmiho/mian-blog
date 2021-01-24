@@ -15,24 +15,24 @@
             登录博客后台
         </div>
         <div class="login-center clearfix">
-            <div class="login-center-img"><img src="https://gitee.com/cn_moti/moti-img/raw/master/2020-10-06/675a6ab555c84f74a01b97d59551419b.png" /></div>
+            <div class="login-center-img"><img src="https://gitee.com/anmiho/blog-images/raw/master/other/675a6ab555c84f74a01b97d59551419b.png" /></div>
             <div class="login-center-input">
                 <input id="name" type="text" name="" placeholder="请输入您的用户名" onfocus="this.placeholder=''" onblur="this.placeholder='请输入您的用户名'" autocomplete="off" />
                 <div class="login-center-input-text">用户名</div>
             </div>
         </div>
         <div class="login-center clearfix">
-            <div class="login-center-img"><img src="https://gitee.com/cn_moti/moti-img/raw/master/2020-10-06/486591f061994b549049ef3c47c53d9e.png" /></div>
+            <div class="login-center-img"><img src="https://gitee.com/anmiho/blog-images/raw/master/other/486591f061994b549049ef3c47c53d9e.png" /></div>
             <div class="login-center-input">
                 <input id="password" type="password" name="" value="" placeholder="请输入您的密码" onfocus="this.placeholder=''" onblur="this.placeholder='请输入您的密码'" />
                 <div class="login-center-input-text">密码</div>
             </div>
         </div>
         <div class="login-button">
-            登陆
+            登录
         </div>
         <div class="login-qq">
-            <a href="loginByQQ"><img src="https://gitee.com/cn_moti/moti-img/raw/master/2020-10-11/3016c269659c42faaf0b4f16cf10dfc5.png" alt="QQ登录" title="QQ登录"></a>
+            <a href="loginByQQ"><img src="https://gitee.com/anmiho/blog-images/raw/master/other/3016c269659c42faaf0b4f16cf10dfc5.png" alt="QQ登录" title="QQ登录"></a>
         </div>
     </div>
     <div class="sk-rotating-plane"></div>
@@ -91,8 +91,8 @@
                     success: function(data){
                         if (data['code']== 200){
                             var location = window.location.href;
-                            let strings = location.split("moti-blog");
-                            window.location.href = strings[0]+"moti-blog/dashboard";
+                            let strings = location.split("mian-blog");
+                            window.location.href = strings[0]+"mian-blog/dashboard";
                         }else {
                             xtip.confirm('请检查你的用户名和密码！','',{icon:'e',title:'登录失败',btn:[]});
                         }
