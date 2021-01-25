@@ -7,6 +7,7 @@
     <link rel="stylesheet" media="screen" href="login/css/style.css">
     <link rel="stylesheet" type="text/css" href="login/css/reset.css" />
     <link rel="stylesheet" type="text/css" href="common/css/xtiper.css" />
+    <link rel="shortcut icon" href="background/images/favicon.ico" />
 </head>
 <body>
 <div id="particles-js">
@@ -64,6 +65,21 @@
             ele.className = newClass.replace(/^\s+|\s+$/g, '');
         }
     }
+
+    document.getElementById("name").addEventListener("keyup", function(e) {
+        e.preventDefault();
+        if (e.keyCode === 13) {
+            document.querySelector(".login-button").click();
+        }
+    });
+
+    document.getElementById("password").addEventListener("keyup", function(e) {
+        e.preventDefault();
+        if (e.keyCode === 13) {
+            document.querySelector(".login-button").click();
+        }
+    });
+
     document.querySelector(".login-button").onclick = function(){
         var name = document.getElementById("name").value.trim();
         var password = document.getElementById("password").value.trim();
@@ -94,7 +110,7 @@
                             let strings = location.split("mian-blog");
                             window.location.href = strings[0]+"mian-blog/dashboard";
                         }else {
-                            xtip.confirm('请检查你的用户名和密码！','',{icon:'e',title:'登录失败',btn:[]});
+                            xtip.confirm('请检查您的用户名和密码！','',{icon:'e',title:'登录失败',btn:[]});
                         }
                     }
                 });
