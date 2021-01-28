@@ -2,6 +2,8 @@ package com.mian.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.mian.entity.*;
+import com.mian.redis.ArchivesKey;
+import com.mian.redis.ArticleKey;
 import com.mian.service.ArticleService;
 import com.mian.utils.ImageUtils;
 import org.elasticsearch.action.search.SearchRequest;
@@ -228,14 +230,14 @@ public class ArticleServiceImpl extends BaseService implements ArticleService {
     @Override
     public List<Article> orderByReadCount() {
         List<Article> famousArticles = null;
-//        if (redisService.exists(ArticleKey.getfamousArticles, "")) {
-//            famousArticles = redisService.getList(ArticleKey.getfamousArticles, "", Article.class);
-//        } else {
-//            PageHelper.startPage(1, 10);
-//            famousArticles = getArticles(articleMapper.orderByReadCount());
-//            // 获取并存入缓存
-//            redisService.setList(ArticleKey.getfamousArticles, "", famousArticles);
-//        }
+        if (redisService.exists(ArticleKey.getfamousArticles, "")) {
+            famousArticles = redisService.getList(ArticleKey.getfamousArticles, "", Article.class);
+        } else {
+            PageHelper.startPage(1, 10);
+            famousArticles = getArticles(articleMapper.orderByReadCount());
+            // 获取并存入缓存
+            redisService.setList(ArticleKey.getfamousArticles, "", famousArticles);
+        }
         return famousArticles;
     }
 
@@ -248,13 +250,13 @@ public class ArticleServiceImpl extends BaseService implements ArticleService {
     public List<ArticleDateArchive> getArchive() {
         // 获取缓存中的日期归档
         List<ArticleDateArchive> archives = null;
-//        if (redisService.exists(ArchivesKey.getIndex, "")) {
-//            archives = redisService.getList(ArchivesKey.getIndex, "", ArticleDateArchive.class);
-//        } else {
-//            archives = articleMapper.getArchive();
-//            // 获取并存入缓存
-//            redisService.setList(ArchivesKey.getIndex, "", archives);
-//        }
+        if (redisService.exists(ArchivesKey.getIndex, "")) {
+            archives = redisService.getList(ArchivesKey.getIndex, "", ArticleDateArchive.class);
+        } else {
+            archives = articleMapper.getArchive();
+            // 获取并存入缓存
+            redisService.setList(ArchivesKey.getIndex, "", archives);
+        }
         return archives;
     }
 
@@ -266,15 +268,16 @@ public class ArticleServiceImpl extends BaseService implements ArticleService {
     @Override
     public List<Article> orderByPublishTime(Integer page) {
         List<Article> articles = null;
-//        // 获取缓存中的文章
-//        if (redisService.exists(ArticleKey.getIndex, String.valueOf(page))) {
-//            articles = redisService.getList(ArticleKey.getIndex, String.valueOf(page), Article.class);
-//        } else {
-//            PageHelper.startPage(page, 10);
-//            articles = getArticles(articleMapper.orderByPublishTime());
-//            // 获取并存入缓存
-//            redisService.setList(ArticleKey.getIndex, String.valueOf(page), articles);
-//        }
+        // 获取缓存中的文章
+        if (redisService.exists(ArticleKey.getIndex, String.valueOf(page))) {
+            articles = redisService.getList(ArticleKey.getIndex, String.valueOf(page), Article.class);
+        } else {
+            PageHelper.startPage(page, 10);
+            // 处理文章集合
+            articles = getArticles(articleMapper.orderByPublishTime());
+            // 获取并存入缓存
+            redisService.setList(ArticleKey.getIndex, String.valueOf(page), articles);
+        }
         return articles;
     }
 
@@ -503,9 +506,10 @@ public class ArticleServiceImpl extends BaseService implements ArticleService {
      **/
     private List<Article> getArticles(List<Article> articles) {
         articles.forEach(article -> {
+            // 获取文章的标签
             List<Tag> list = articleTagMapper.queryByArticleId(article.getId());
             article.setTags(list);
-            // 获取该文章的分类
+            // 获取文章的分类
             Kind kinds = articleKindMapper.queryByArticleId(article.getId());
             article.setKinds(kinds);
         });

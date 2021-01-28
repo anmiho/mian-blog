@@ -1,6 +1,7 @@
 package com.mian.service.impl;
 
 import com.mian.entity.Tag;
+import com.mian.redis.TagKey;
 import com.mian.service.TagService;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
@@ -68,22 +69,21 @@ public class TagServiceImpl extends BaseService implements TagService {
      */
     @Override
     public List<Tag> queryAll() {
-//        List<Tag> tags = null;
-//        // 获取所有标签
-//        if (redisService.exists(TagKey.getIndex,"")){
-//            tags = redisService.getList(TagKey.getIndex,"",Tag.class);
-//        }else {
-//            // 获取并存入缓存
-//            tags = tagMapper.queryAll();
-//            tags.forEach(tag -> {
-//                tag.setArticleCount(articleTagMapper.getArticleCount(tag.getId()));
-//            });
-//            if (!ObjectUtils.isEmpty(tags)){
-//                redisService.setList(TagKey.getIndex,"",tags);
-//            }
-//        }
-//        return tags;
-        return null;
+        List<Tag> tags = null;
+        // 获取所有标签
+        if (redisService.exists(TagKey.getIndex,"")){
+            tags = redisService.getList(TagKey.getIndex,"",Tag.class);
+        }else {
+            // 获取并存入缓存
+            tags = tagMapper.queryAll();
+            tags.forEach(tag -> {
+                tag.setArticleCount(articleTagMapper.getArticleCount(tag.getId()));
+            });
+            if (!ObjectUtils.isEmpty(tags)){
+                redisService.setList(TagKey.getIndex,"",tags);
+            }
+        }
+        return tags;
     }
 
     /**

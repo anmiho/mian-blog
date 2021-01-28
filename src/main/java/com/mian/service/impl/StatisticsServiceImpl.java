@@ -1,6 +1,10 @@
 package com.mian.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.mian.entity.Article;
 import com.mian.entity.Statistics;
+import com.mian.redis.ArticleKey;
+import com.mian.redis.StatisticsKey;
 import com.mian.service.StatisticsService;
 import com.mian.utils.IPUtils;
 import com.mian.vo.StatisticsCount;
@@ -83,13 +87,21 @@ public class StatisticsServiceImpl extends BaseService implements StatisticsServ
      */
     @Override
     public void update(HttpServletRequest request, Integer aId) {
-//        // 获取请求的IP地址
-//        String ip = IPUtils.getIpAddress(request);
-//        redisService.incr(StatisticsKey.todayVisitor, ip + ":" + aId);
+        // 获取请求的IP地址
+        String ip = IPUtils.getIpAddress(request);
+        // 获取缓存中的记录
+        if (redisService.exists(StatisticsKey.todayVisitor, ip + ":" + aId)) {
+            redisService.incr(StatisticsKey.todayVisitor, ip + ":" + aId);
+        } else {
+            // TODO: 每日更新 访问主页ip的 访问量
+            // 设置并存入缓存
+            Statistics statistics = new Statistics(ip,1,new Date(),-1);
+            redisService.set(StatisticsKey.todayVisitor, ip + ":" + aId, 1, 0);
+        }
     }
 
     /**
-     * @return com.moti.entity.RequestStatic
+     * @return com.mian.entity.RequestStatic
      * @Description 根据IP获取访问数据
      * @Param [ip]
      **/

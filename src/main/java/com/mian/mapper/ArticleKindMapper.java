@@ -33,7 +33,7 @@ public interface ArticleKindMapper {
     Integer getArticleCount(Integer id);
 
     /**
-     * @return java.util.List<com.moti.entity.Kind>
+     * @return java.util.List<com.mian.entity.Kind>
      * @Description 根据文章ID查询所有分类
      * @Param [id]
      **/

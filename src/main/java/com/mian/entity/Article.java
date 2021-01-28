@@ -48,7 +48,7 @@ public class Article implements Serializable {
     private Date recentEdit;
 
     /**
-     * 文章状态。0：草稿，1：发布，2：回收站
+     * 文章状态，0：草稿，1：发布，2：回收站，3：无权限访问
      */
     @Field(store = false)
     private Integer status;

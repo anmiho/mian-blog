@@ -33,14 +33,14 @@ public class SystemController extends BaseController {
         if (ObjectUtils.isEmpty(page)) {
             page = 1;
         } else if (page < 1 || page > totalPage) {
-            return "error/401";
+            return "error/404";
         }
         // 更新/新增 访问数据
         statisticsService.update(request, -1);
         // 获取主页的10篇文章
         List<Article> articles = articleService.orderByPublishTime(page);
         // 获取所有标签
-        List<Tag> tags = tags = tagService.queryAll();
+        List<Tag> tags = tagService.queryAll();
         // 获取所有的文集
         List<Kind> kinds = kindService.queryAll();
         // 获取阅读量最高的10篇文章

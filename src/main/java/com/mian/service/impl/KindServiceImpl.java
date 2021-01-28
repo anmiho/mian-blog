@@ -1,6 +1,7 @@
 package com.mian.service.impl;
 
 import com.mian.entity.Kind;
+import com.mian.redis.KindKey;
 import com.mian.service.KindService;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
@@ -68,20 +69,19 @@ public class KindServiceImpl extends BaseService implements KindService {
      */
     @Override
     public List<Kind> queryAll() {
-//        // 获取缓存中的文集
-//        List<Kind> kinds = null;
-//        if (redisService.exists(KindKey.getIndex, "")) {
-//            kinds = redisService.getList(KindKey.getIndex, "", Kind.class);
-//        } else {
-//            // 获取并存入缓存
-//            kinds = kindMapper.queryAll();
-//            kinds.forEach(kind -> {
-//                kind.setArticleCount(articleKindMapper.getArticleCount(kind.getId()));
-//            });
-//            redisService.setList(KindKey.getIndex, "", kinds);
-//        }
-//        return kinds;
-        return null;
+        // 获取缓存中的文集
+        List<Kind> kinds = null;
+        if (redisService.exists(KindKey.getIndex, "")) {
+            kinds = redisService.getList(KindKey.getIndex, "", Kind.class);
+        } else {
+            // 获取并存入缓存
+            kinds = kindMapper.queryAll();
+            kinds.forEach(kind -> {
+                kind.setArticleCount(articleKindMapper.getArticleCount(kind.getId()));
+            });
+            redisService.setList(KindKey.getIndex, "", kinds);
+        }
+        return kinds;
     }
 
     /**

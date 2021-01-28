@@ -48,14 +48,14 @@ public interface MenuService {
     List<Menu> queryAll(Menu menu);
 
     /**
-     * @return java.util.List<com.moti.entity.Menu>
+     * @return java.util.List<com.mian.entity.Menu>
      * @Description 获取左侧菜单
      * @Param []
      **/
     List<Menu> getLeftMenus();
 
     /**
-     * @return java.util.List<com.moti.entity.Menu>
+     * @return java.util.List<com.mian.entity.Menu>
      * @Description 获取右侧菜单
      * @Param []
      **/

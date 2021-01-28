@@ -1,6 +1,7 @@
 package com.mian.service.impl;
 
 import com.mian.entity.Link;
+import com.mian.redis.LinkKey;
 import com.mian.service.LinkService;
 import org.springframework.stereotype.Service;
 
@@ -57,17 +58,16 @@ public class LinkServiceImpl extends BaseService implements LinkService {
      */
     @Override
     public List<Link> queryAll() {
-//        // 获取缓存中的友情链接
-//        List<Link> links = null;
-//        if (redisService.exists(LinkKey.getIndex, "")) {
-//            links = redisService.getList(LinkKey.getIndex, "", Link.class);
-//        } else {
-//            // 获取并存入缓存
-//            links = linkMapper.queryAll();
-//            redisService.setList(LinkKey.getIndex, "", links);
-//        }
-//        return links;
-        return null;
+        // 获取缓存中的友情链接
+        List<Link> links = null;
+        if (redisService.exists(LinkKey.getIndex, "")) {
+            links = redisService.getList(LinkKey.getIndex, "", Link.class);
+        } else {
+            // 获取并存入缓存
+            links = linkMapper.queryAll();
+            redisService.setList(LinkKey.getIndex, "", links);
+        }
+        return links;
     }
 
     /**

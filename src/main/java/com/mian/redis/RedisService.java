@@ -31,7 +31,7 @@ public class RedisService {
         logger.warn("【Redis】是否存在，键：" + prefix.getPrefix() + key);
         //生成真正的key
         String realKey = ObjectUtils.isEmpty(key) ? prefix.getPrefix() : prefix.getPrefix() + ":" + key;
-        logger.warn("【Redis】结果："+ RedisUtils.hasKey(realKey));
+        logger.warn("【Redis】结果：" + RedisUtils.hasKey(realKey));
         return RedisUtils.hasKey(realKey);
     }
 
@@ -39,12 +39,12 @@ public class RedisService {
      * 获取某个对象
      */
     public <T> T get(KeyPrefix prefix, String key, Class<T> clazz) {
-        logger.warn("【Redis】获取值，键：" + prefix.getPrefix()+":"+ key);
+        logger.warn("【Redis】获取值，键：" + prefix.getPrefix() + ":" + key);
         //生成真正的key
         String realKey = ObjectUtils.isEmpty(key) ? prefix.getPrefix() : prefix.getPrefix() + ":" + key;
         String str = (String) RedisUtils.get(realKey);
         T t = BeanUtils.stringToBean(str, clazz);
-        logger.warn("【Redis】结果："+t);
+        logger.warn("【Redis】结果：" + t);
         return t;
     }
 
@@ -72,40 +72,71 @@ public class RedisService {
     }
 
     /**
-     //     * 删除对象
-     //     */
+     * 删除对象
+     */
     public Long del(KeyPrefix prefix, String key) {
-        logger.warn("【Redis】删除对象，键：" + prefix.getPrefix() +":"+ key);
+        logger.warn("【Redis】删除对象，键：" + prefix.getPrefix() + ":" + key);
         String realKey = ObjectUtils.isEmpty(key) ? prefix.getPrefix() : prefix.getPrefix() + ":" + key;
         Long result = RedisUtils.del(realKey);
-        logger.warn("【Redis】结果："+result + ",realKey："+realKey);
+        logger.warn("【Redis】结果：" + result + ",realKey：" + realKey);
         return result;
     }
 
-//    /**
-//     * 获取整合集合
-//     */
-//    public <T> List<T> getList(KeyPrefix prefix, String key, Class<T> clazz) {
-//        logger.warn("【Redis】获取整合集合，键：" + prefix.getPrefix() + key);
-//        Jedis jedis = null;
-//        try {
-//            jedis = jedisPool.getResource();
-//            //生成真正的key
-//            String realKey = ObjectUtils.isEmpty(key) ? prefix.getPrefix() : prefix.getPrefix() + ":" + key;
-//            List<String> names = jedis.lrange(realKey, 0, -1);
-//            List<T> list = new ArrayList<T>();
-//            names.forEach(name -> {
-//                T t = BeanUtils.stringToBean(name, clazz);
-//                list.add(t);
-//            });
-//            Collections.reverse(list);
-//            logger.warn("【Redis】结果："+list);
-//            return list;
-//        } finally {
-//            returnToPool(jedis);
-//        }
-//    }
-//
+    /**
+     * 增加值
+     */
+    public <T> Long incr(KeyPrefix prefix, String key) {
+        logger.warn("【Redis】增加值，键：" + prefix.getPrefix() + key);
+        //生成真正的key
+        String realKey = ObjectUtils.isEmpty(key) ? prefix.getPrefix() : prefix.getPrefix() + ":" + key;
+        return RedisUtils.incr(realKey, 1);
+    }
+
+    /**
+     * 减少值
+     */
+    public <T> Long decr(KeyPrefix prefix, String key) {
+        logger.warn("【Redis】减少值，键：" + prefix.getPrefix() + key);
+        //生成真正的key
+        String realKey = ObjectUtils.isEmpty(key) ? prefix.getPrefix() : prefix.getPrefix() + ":" + key;
+        return RedisUtils.decr(realKey, 1);
+    }
+
+    /**
+     * 获取整合集合
+     */
+    public <T> List<T> getList(KeyPrefix prefix, String key, Class<T> clazz) {
+        logger.warn("【Redis】获取整合集合，键：" + prefix.getPrefix() + key);
+        //生成真正的key
+        String realKey = ObjectUtils.isEmpty(key) ? prefix.getPrefix() : prefix.getPrefix() + ":" + key;
+        List<Object> names = RedisUtils.lRange(realKey, 0, -1);
+        List<T> list = new ArrayList<T>();
+        names.forEach(name -> {
+            T t = BeanUtils.stringToBean((String) name, clazz);
+            list.add(t);
+        });
+        Collections.reverse(list);
+        logger.warn("【Redis】结果：" + list);
+        return list;
+    }
+
+    /**
+     * 设置整个集合
+     */
+    public <T> void setList(KeyPrefix prefix, String key, List<T> list) {
+        logger.warn("【Redis】设置集合，键：" + prefix.getPrefix() + ":" + key);
+        //生成真正的key
+        String realKey = ObjectUtils.isEmpty(key) ? prefix.getPrefix() : prefix.getPrefix() + ":" + key;
+        for (int i = 0; i < list.size(); i++) {
+            String string = BeanUtils.beanToString(list.get(i));
+            if(RedisUtils.lSet(realKey, string)){
+                logger.warn("【Redis】结果：设置集合成功,realKey:" + realKey);
+            }else{
+                logger.warn("【Redis】结果：设置集合失败！");
+            }
+        }
+    }
+
 //    /**
 //     * 设置定时
 //     */
@@ -125,25 +156,7 @@ public class RedisService {
 //        }
 //    }
 //
-//    /**
-//     * 设置整个集合
-//     */
-//    public <T> void setList(KeyPrefix prefix, String key, List<T> list) {
-//        logger.warn("【Redis】设置集合，键：" + prefix.getPrefix()+ ":" + key);
-//        Jedis jedis = null;
-//        try {
-//            jedis = jedisPool.getResource();
-//            //生成真正的key
-//            String realKey = ObjectUtils.isEmpty(key) ? prefix.getPrefix() : prefix.getPrefix() + ":" + key;
-//            for (int i = 0; i < list.size(); i++) {
-//                String string = BeanUtils.beanToString(list.get(i));
-//                jedis.lpush(realKey, string);
-//            }
-//            logger.warn("【Redis】结果：设置集合成功,realKey:"+realKey);
-//        } finally {
-//            returnToPool(jedis);
-//        }
-//    }
+
 //
 //
 //
@@ -170,38 +183,8 @@ public class RedisService {
 //        }
 //    }
 //
-//    /**
-//     * 增加值
-//     */
-//    public <T> Long incr(KeyPrefix prefix, String key) {
-//        logger.warn("【Redis】增加值，键：" + prefix.getPrefix() + key);
-//        Jedis jedis = null;
-//        try {
-//            jedis = jedisPool.getResource();
-//            //生成真正的key
-//            String realKey = ObjectUtils.isEmpty(key) ? prefix.getPrefix() : prefix.getPrefix() + ":" + key;
-//            return jedis.incr(realKey);
-//        } finally {
-//            returnToPool(jedis);
-//        }
-//    }
-//
-//    /**
-//     * 减少值
-//     */
-//    public <T> Long decr(KeyPrefix prefix, String key) {
-//        logger.warn("【Redis】减少值，键：" + prefix.getPrefix() + key);
-//        Jedis jedis = null;
-//        try {
-//            jedis = jedisPool.getResource();
-//            //生成真正的key
-//            String realKey = ObjectUtils.isEmpty(key) ? prefix.getPrefix() : prefix.getPrefix() + ":" + key;
-//            return jedis.decr(realKey);
-//        } finally {
-//            returnToPool(jedis);
-//        }
-//    }
-//
+
+
 //    /**
 //     * 根据大键查询所有键
 //     */

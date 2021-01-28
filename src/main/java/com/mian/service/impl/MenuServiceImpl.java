@@ -1,6 +1,7 @@
 package com.mian.service.impl;
 
 import com.mian.entity.Menu;
+import com.mian.redis.MenuKey;
 import com.mian.service.MenuService;
 import org.springframework.stereotype.Service;
 
@@ -77,17 +78,16 @@ public class MenuServiceImpl extends BaseService implements MenuService {
      **/
     @Override
     public List<Menu> getLeftMenus() {
-//        // 获取缓存中左侧菜单
-//        List<Menu> leftMenus = null;
-//        if (redisService.exists(MenuKey.getLeftMenu,"")) {
-//            leftMenus = redisService.getList(MenuKey.getLeftMenu, "", Menu.class);
-//        }else {
-//            leftMenus = menuMapper.queryAll(new Menu(0));
-//            // 获取并存入缓存
-//            redisService.setList(MenuKey.getLeftMenu,"",leftMenus);
-//        }
-//        return leftMenus;
-        return null;
+        // 获取缓存中左侧菜单
+        List<Menu> leftMenus = null;
+        if (redisService.exists(MenuKey.getLeftMenu,"")) {
+            leftMenus = redisService.getList(MenuKey.getLeftMenu, "", Menu.class);
+        }else {
+            leftMenus = menuMapper.queryAll(new Menu(0));
+            // 获取并存入缓存
+            redisService.setList(MenuKey.getLeftMenu,"",leftMenus);
+        }
+        return leftMenus;
     }
 
     /**
@@ -97,17 +97,16 @@ public class MenuServiceImpl extends BaseService implements MenuService {
      **/
     @Override
     public List<Menu> getRightMenus() {
-//        // 获取缓存中右侧菜单
-//        List<Menu> rightMenus = null;
-//        if (redisService.exists(MenuKey.getRightMenu,"")) {
-//            rightMenus = redisService.getList(MenuKey.getRightMenu, "", Menu.class);
-//        }else {
-//            rightMenus = menuMapper.queryAll(new Menu(1));
-//            // 获取并存入缓存
-//            redisService.setList(MenuKey.getRightMenu,"",rightMenus);
-//        }
-//        return rightMenus;
-        return null;
+        // 获取缓存中右侧菜单
+        List<Menu> rightMenus = null;
+        if (redisService.exists(MenuKey.getRightMenu,"")) {
+            rightMenus = redisService.getList(MenuKey.getRightMenu, "", Menu.class);
+        }else {
+            rightMenus = menuMapper.queryAll(new Menu(1));
+            // 获取并存入缓存
+            redisService.setList(MenuKey.getRightMenu,"",rightMenus);
+        }
+        return rightMenus;
     }
 
     /**
