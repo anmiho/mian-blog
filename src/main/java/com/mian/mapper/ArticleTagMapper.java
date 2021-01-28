@@ -45,7 +45,7 @@ public interface ArticleTagMapper {
     /**
      * @Description 根据文章ID查询所有标签
      * @Param [id]
-     * @return java.util.List<com.moti.entity.Tag>
+     * @return java.util.List<com.mian.entity.Tag>
      **/
     List<Tag> queryByArticleId(Integer id);
 }

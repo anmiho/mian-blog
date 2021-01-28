@@ -167,11 +167,11 @@
 
                     <div class="author-date" style="font-size: 14px">
                         <div class="author-thumb">
-                            <a href="/moti-blog">
+                            <a href="/mian-blog">
                                 <img alt="author" th:src="${user.img}" width="50px" class="avatar">
                             </a>
                         </div>
-                        <a class="h6 post__author-name fn" href="/moti-blog" style="font-size: 14px" th:text="${user.name}"></a>
+                        <a class="h6 post__author-name fn" href="/mian-blog" style="font-size: 14px" th:text="${user.name}"></a>
                         <div class="post__date">
                             <time class="published" datetime="2017-03-24T18:18" th:text="${' - 发布于' + #dates.format(article.publishTime,'yyyy年MM月dd日 HH:mm:ss')}">
                             </time>
@@ -230,9 +230,9 @@
                         <ul class="children" th:if="${comment.reply.size() != 0}">
                             <li class="comment-item" th:each="reply:${comment.reply}">
                                 <div class="post__author author vcard inline-items">
-                                    <a href="/moti-blog"><img th:src="${user.img}" alt="author"></a>
+                                    <a href="/mian-blog"><img th:src="${user.img}" alt="author"></a>
                                     <div class="author-date">
-                                        <a class="h6 post__author-name fn" href="/moti-blog" th:text="${user.name}"></a>
+                                        <a class="h6 post__author-name fn" href="/mian-blog" th:text="${user.name}"></a>
                                         <div class="post__date">
                                             <time class="published" th:text="${#dates.format(reply.time,'yyyy年MM月dd日 HH:mm:ss')}"></time>
                                         </div>
@@ -281,11 +281,11 @@
                         <div class="row">
                             <div class="col-12" style="text-align: center;margin-top: 5px">
                                 <div class="author-thumb">
-                                    <a href="/moti-blog"><img style="width: 70px;height: 70px" alt="author" th:src="${user.img}" src="img/friend-harmonic7.jpg" class="avatar"></a>
+                                    <a href="/mian-blog"><img style="width: 70px;height: 70px" alt="author" th:src="${user.img}" src="img/friend-harmonic7.jpg" class="avatar"></a>
                                 </div>
                             </div>
                         </div>
-                        <div class="row" style="padding: 0px 40px 0px 40px;color: #515365;">昵称：<a href="/moti-blog">[[${user.name}]]</a></div>
+                        <div class="row" style="padding: 0px 40px 0px 40px;color: #515365;">昵称：<a href="/mian-blog">[[${user.name}]]</a></div>
                         <div th:if="${user.email.trim() != ''}" class="row" style="padding: 0px 40px 0px 40px;color: #515365;">邮箱：[[${user.email}]]</div>
                         <div th:if="${user.phone.trim() != ''}" class="row" style="padding: 0px 40px 0px 40px;color: #515365;">手机号码：[[${user.phone}]]</div>
                         <div th:if="${user.qq.trim() != ''}" class="row" style="padding: 0px 40px 0px 40px;color: #515365;">QQ号：[[${user.qq}]]</div>

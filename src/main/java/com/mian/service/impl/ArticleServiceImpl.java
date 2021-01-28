@@ -69,23 +69,23 @@ public class ArticleServiceImpl extends BaseService implements ArticleService {
     @Override
     public Article queryById(Integer id) {
         Article article = null;
-//        if (redisService.exists(ArticleKey.getById, String.valueOf(id))) {
-//            article = redisService.get(ArticleKey.getById, String.valueOf(id), Article.class);
-//        } else {
-//            article = articleMapper.queryById(id);
-//            if (article == null) {
-//                return article;
-//            }
-//            // 获取该文章的分类
-//            Kind kinds = articleKindMapper.queryByArticleId(id);
-//            // 获取该文章的分类
-//            List<Tag> tags = articleTagMapper.queryByArticleId(id);
-//            article.setKinds(kinds);
-//            article.setTags(tags);
-//            if (!ObjectUtils.isEmpty(article)) {
-//                redisService.set(ArticleKey.getById, String.valueOf(id), article, 60 * 60 * 24);
-//            }
-//        }
+        if (redisService.exists(ArticleKey.getById, String.valueOf(id))) {
+            article = redisService.get(ArticleKey.getById, String.valueOf(id), Article.class);
+        } else {
+            article = articleMapper.queryById(id);
+            if (article == null) {
+                return article;
+            }
+            // 获取该文章的分类
+            Kind kinds = articleKindMapper.queryByArticleId(id);
+            // 获取该文章的标签
+            List<Tag> tags = articleTagMapper.queryByArticleId(id);
+            article.setKinds(kinds);
+            article.setTags(tags);
+            if (!ObjectUtils.isEmpty(article)) {
+                redisService.set(ArticleKey.getById, String.valueOf(id), article, 60 * 60 * 24);
+            }
+        }
         return article;
     }
 
@@ -288,12 +288,12 @@ public class ArticleServiceImpl extends BaseService implements ArticleService {
      **/
     @Override
     public void addReadCount(Integer id) {
-//        if (redisService.exists(ArticleKey.getByReadCount, String.valueOf(id))) {
-//            redisService.incr(ArticleKey.getByReadCount, String.valueOf(id));
-//        } else {
-//            Article article = articleMapper.queryById(id);
-//            redisService.set(ArticleKey.getByReadCount, String.valueOf(id), article.getReadCount() + 1, 0);
-//        }
+        if (redisService.exists(ArticleKey.getByReadCount, String.valueOf(id))) {
+            redisService.incr(ArticleKey.getByReadCount, String.valueOf(id));
+        } else {
+            Article article = articleMapper.queryById(id);
+            redisService.set(ArticleKey.getByReadCount, String.valueOf(id), article.getReadCount() + 1, 0);
+        }
     }
 
     /**
@@ -306,12 +306,12 @@ public class ArticleServiceImpl extends BaseService implements ArticleService {
     @Override
     public Integer getReadCount(Integer id) {
         Integer count = 0;
-//        if (redisService.exists(ArticleKey.getByReadCount, String.valueOf(id))) {
-//            count = redisService.get(ArticleKey.getByReadCount, String.valueOf(id), Integer.class);
-//        } else {
-//            count = queryById(id).getReadCount();
-//            redisService.set(ArticleKey.getByReadCount, String.valueOf(id), count, 0);
-//        }
+        if (redisService.exists(ArticleKey.getByReadCount, String.valueOf(id))) {
+            count = redisService.get(ArticleKey.getByReadCount, String.valueOf(id), Integer.class);
+        } else {
+            count = queryById(id).getReadCount();
+            redisService.set(ArticleKey.getByReadCount, String.valueOf(id), count, 0);
+        }
         return count;
     }
 

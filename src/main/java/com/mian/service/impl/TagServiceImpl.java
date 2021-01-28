@@ -71,16 +71,16 @@ public class TagServiceImpl extends BaseService implements TagService {
     public List<Tag> queryAll() {
         List<Tag> tags = null;
         // 获取所有标签
-        if (redisService.exists(TagKey.getIndex,"")){
-            tags = redisService.getList(TagKey.getIndex,"",Tag.class);
-        }else {
+        if (redisService.exists(TagKey.getIndex, "")) {
+            tags = redisService.getList(TagKey.getIndex, "", Tag.class);
+        } else {
             // 获取并存入缓存
             tags = tagMapper.queryAll();
             tags.forEach(tag -> {
                 tag.setArticleCount(articleTagMapper.getArticleCount(tag.getId()));
             });
-            if (!ObjectUtils.isEmpty(tags)){
-                redisService.setList(TagKey.getIndex,"",tags);
+            if (!ObjectUtils.isEmpty(tags)) {
+                redisService.setList(TagKey.getIndex, "", tags);
             }
         }
         return tags;

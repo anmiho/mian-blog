@@ -95,7 +95,7 @@ public class StatisticsServiceImpl extends BaseService implements StatisticsServ
         } else {
             // TODO: 每日更新 访问主页ip的 访问量
             // 设置并存入缓存
-            Statistics statistics = new Statistics(ip,1,new Date(),-1);
+            Statistics statistics = new Statistics(ip, 1, new Date(), aId);
             redisService.set(StatisticsKey.todayVisitor, ip + ":" + aId, 1, 0);
         }
     }

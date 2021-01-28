@@ -180,7 +180,7 @@
         </trim>
     </select>
 
-    <!--根据文章ID和类型获取文章-->
+    <!--根据文章ID和类型获取评论-->
     <select id="queryByArticleIdAndType" resultType="com.mian.entity.Comment">
         select
         <include refid="allColumn"></include>
@@ -188,7 +188,7 @@
         order by `time` desc
     </select>
 
-    <!--获取所有回复的文章-->
+    <!--获取所有回复的评论-->
     <select id="queryReplyComment" resultType="com.mian.entity.Comment">
         select
         <include refid="allColumn"></include>

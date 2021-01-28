@@ -62,7 +62,7 @@ public interface CommentService {
     boolean update(Comment comment);
 
     /**
-     * @return java.util.List<com.moti.entity.Comment>
+     * @return java.util.List<com.mian.entity.Comment>
      * @Description 根据文章ID和类型获取文章
      * @Param [aId, type]
      **/

@@ -1,6 +1,7 @@
 package com.mian.service.impl;
 
 import com.mian.entity.Comment;
+import com.mian.redis.CommentKey;
 import com.mian.service.CommentService;
 import org.springframework.stereotype.Service;
 
@@ -117,19 +118,18 @@ public class CommentServiceImpl extends BaseService implements CommentService {
      **/
     @Override
     public List<Comment> queryByArticleIdAndType(Integer aId, Integer type) {
-//        List<Comment> comments = null;
-//        if (redisService.exists(CommentKey.getByArticleId, String.valueOf(aId))) {
-//            comments = redisService.getList(CommentKey.getByArticleId, String.valueOf(aId), Comment.class);
-//        } else {
-//            comments = commentMapper.queryByArticleIdAndType(aId, type);
-//            comments.forEach(comment -> {
-//                List<Comment> list = commentMapper.queryReplyComment(comment.getId());
-//                comment.setReply(list);
-//            });
-//            redisService.setList(CommentKey.getByArticleId, String.valueOf(aId), comments);
-//        }
-//        return comments;
-        return null;
+        List<Comment> comments = null;
+        if (redisService.exists(CommentKey.getByArticleId, String.valueOf(aId))) {
+            comments = redisService.getList(CommentKey.getByArticleId, String.valueOf(aId), Comment.class);
+        } else {
+            comments = commentMapper.queryByArticleIdAndType(aId, type);
+            comments.forEach(comment -> {
+                List<Comment> list = commentMapper.queryReplyComment(comment.getId());
+                comment.setReply(list);
+            });
+            redisService.setList(CommentKey.getByArticleId, String.valueOf(aId), comments);
+        }
+        return comments;
     }
 
     /**

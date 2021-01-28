@@ -11,6 +11,7 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.util.ObjectUtils;
 import redis.clients.jedis.Jedis;
 
+import javax.annotation.Resource;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
@@ -23,6 +24,9 @@ import java.util.concurrent.TimeUnit;
 public class RedisService {
 
     private Logger logger = LogUtils.getInstance(RedisService.class);
+
+    @Autowired
+    private RedisUtils RedisUtils;
 
     /**
      * 判断key是否存在
@@ -129,10 +133,10 @@ public class RedisService {
         String realKey = ObjectUtils.isEmpty(key) ? prefix.getPrefix() : prefix.getPrefix() + ":" + key;
         for (int i = 0; i < list.size(); i++) {
             String string = BeanUtils.beanToString(list.get(i));
-            if(RedisUtils.lSet(realKey, string)){
+            if(RedisUtils.lPush(realKey, string)){
                 logger.warn("【Redis】结果：设置集合成功,realKey:" + realKey);
             }else{
-                logger.warn("【Redis】结果：设置集合失败！");
+                logger.warn("【Redis】结果：设置集合失败！"+ realKey);
             }
         }
     }
