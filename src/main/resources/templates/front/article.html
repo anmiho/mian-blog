@@ -43,7 +43,7 @@
     <script src="http://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
     <script type="text/javascript">
         $(window).scroll(function () {
-            //浏览器的高度加上滚动条的高度
+                //浏览器的高度加上滚动条的高度
             if ($(window).scrollTop() > 2000){
                 $('#back-top').show("fast");
             }else {
@@ -149,7 +149,7 @@
                 <article class="hentry blog-post single-post single-post-v3">
 
                     <a  th:href="@{search(kindId=${article.kinds.id})}" style="margin: 0px 4px 2px 0px;font-size: 15px" class="post-category bg-blue-light" th:if="${article.kinds != null}">选自文集 《[[${article.kinds.name}]]》</a>
-                    <a  href="#" style="margin: 0px 4px 2px 0px;font-size: 15px" class="post-category bg-blue-light" th:if="${article.kinds == null}">该文章没有添加到任何文集</a>
+                    <a  href="#" style="margin: 0px 4px 2px 0px;font-size: 15px" class="post-category bg-blue-light" th:if="${article.kinds == null}">文章</a>
 
                     <ul class="filter-icons" style="font-size: 14px">
                         <li>
@@ -288,13 +288,13 @@
                         <div class="row" style="padding: 0px 40px 0px 40px;color: #515365;">昵称：<a href="/mian-blog">[[${user.name}]]</a></div>
                         <div th:if="${user.email.trim() != ''}" class="row" style="padding: 0px 40px 0px 40px;color: #515365;">邮箱：[[${user.email}]]</div>
                         <div th:if="${user.phone.trim() != ''}" class="row" style="padding: 0px 40px 0px 40px;color: #515365;">手机号码：[[${user.phone}]]</div>
-                        <div th:if="${user.qq.trim() != ''}" class="row" style="padding: 0px 40px 0px 40px;color: #515365;">QQ号：[[${user.qq}]]</div>
-                        <div th:if="${user.sex != '保密'}" class="row" style="padding: 0px 40px 0px 40px;color: #515365;">性别：[[${user.sex}]]</div>
-                        <div class="row" style="padding: 0px 40px 0px 40px;color: #515365;">年龄：[[${#dates.year(#dates.createNow()) - #dates.year(user.birthday)}]]</div>
-                        <div class="row" style="padding: 0px 40px 0px 40px;color: #515365;">生日：[[${#dates.format(user.birthday,'MM-dd')}]]</div>
+<!--                        <div th:if="${user.qq.trim() != ''}" class="row" style="padding: 0px 40px 0px 40px;color: #515365;">QQ号：[[${user.qq}]]</div>-->
+<!--                        <div th:if="${user.sex != '保密'}" class="row" style="padding: 0px 40px 0px 40px;color: #515365;">性别：[[${user.sex}]]</div>-->
+<!--                        <div class="row" style="padding: 0px 40px 0px 40px;color: #515365;">年龄：[[${#dates.year(#dates.createNow()) - #dates.year(user.birthday)}]]</div>-->
+<!--                        <div class="row" style="padding: 0px 40px 0px 40px;color: #515365;">生日：[[${#dates.format(user.birthday,'MM-dd')}]]</div>-->
                         <div th:if="${user.address.trim() != ''}" class="row" style="padding: 0px 40px 0px 40px;color: #515365;">地区：[[${user.address}]]</div>
-                        <div th:if="${user.career.trim() != ''}" class="row" style="padding: 0px 40px 0px 40px;color: #515365;">职业：[[${user.career}]]</div>
-                        <div th:if="${user.info.trim() != ''}" class="row" style="padding: 0px 40px 20px 40px;color: #515365;">个人说明：[[${user.info}]]</div>
+<!--                        <div th:if="${user.career.trim() != ''}" class="row" style="padding: 0px 40px 0px 40px;color: #515365;">职业：[[${user.career}]]</div>-->
+<!--                        <div th:if="${user.info.trim() != ''}" class="row" style="padding: 0px 40px 20px 40px;color: #515365;">个人说明：[[${user.info}]]</div>-->
                         <br>
                     </article>
                 </div>
@@ -307,16 +307,16 @@
                     <div class="ui-block-content">
                         <div class="text" style="text-indent: 1em;font-size: 14px" th:text="${front.notice}">
 
-                        </div>
-                        <hr>
-                        <div><a th:if="${front.noticeImg != null}" th:href="@{${front.imgTarget}}"><img style="width: 100%" th:src="${front.noticeImg}" alt=""></a></div>
+<!--                        </div>-->
+<!--                        <hr>-->
+<!--                        <div><a th:if="${front.noticeImg != null}" th:href="@{${front.imgTarget}}"><img style="width: 100%" th:src="${front.noticeImg}" alt=""></a></div>-->
                     </div>
                 </div>
 
-                <!--热门文章-->
+                <!--文章-->
                 <div class="ui-block">
                     <div class="ui-block-title">
-                        <h6 class="title">热门文章</h6>
+                        <h6 class="title">文章</h6>
                     </div>
                     <div class="ui-block-content">
 
@@ -330,57 +330,57 @@
                     </div>
                 </div>
 
-                <!--标签云-->
-                <div class="ui-block">
-                    <div class="ui-block-title">
-                        <h6 class="title">标签云</h6>
-                    </div>
-                    <div class="ui-block-content">
-                        <a th:if="${tag.articleCount >= 6 and tag.articleCount < 9}" th:each="tag:${tags}"
-                           th:text="${tag.name + '('+tag.articleCount+')'}"
-                           style="font-size: 18px"
-                           class="tag-cloud" th:href="@{search(tagId=${tag.id})}"></a>
-                        <a th:if="${tag.articleCount >= 3 and tag.articleCount < 6}" th:each="tag:${tags}"
-                           th:text="${tag.name + '('+tag.articleCount+')'}"
-                           style="font-size: 14px"
-                           class="tag-cloud" th:href="@{search(tagId=${tag.id})}"></a>
-                        <a th:if="${tag.articleCount > 0 and tag.articleCount < 3}" th:each="tag:${tags}"
-                           th:text="${tag.name + '('+tag.articleCount+')'}"
-                           style="font-size: 10px"
-                           class="tag-cloud" th:href="@{search(tagId=${tag.id})}"></a>
-                    </div>
-                </div>
+<!--                &lt;!&ndash;标签云&ndash;&gt;-->
+<!--                <div class="ui-block">-->
+<!--                    <div class="ui-block-title">-->
+<!--                        <h6 class="title">标签云</h6>-->
+<!--                    </div>-->
+<!--                    <div class="ui-block-content">-->
+<!--                        <a th:if="${tag.articleCount >= 6 and tag.articleCount < 9}" th:each="tag:${tags}"-->
+<!--                           th:text="${tag.name + '('+tag.articleCount+')'}"-->
+<!--                           style="font-size: 18px"-->
+<!--                           class="tag-cloud" th:href="@{search(tagId=${tag.id})}"></a>-->
+<!--                        <a th:if="${tag.articleCount >= 3 and tag.articleCount < 6}" th:each="tag:${tags}"-->
+<!--                           th:text="${tag.name + '('+tag.articleCount+')'}"-->
+<!--                           style="font-size: 14px"-->
+<!--                           class="tag-cloud" th:href="@{search(tagId=${tag.id})}"></a>-->
+<!--                        <a th:if="${tag.articleCount > 0 and tag.articleCount < 3}" th:each="tag:${tags}"-->
+<!--                           th:text="${tag.name + '('+tag.articleCount+')'}"-->
+<!--                           style="font-size: 10px"-->
+<!--                           class="tag-cloud" th:href="@{search(tagId=${tag.id})}"></a>-->
+<!--                    </div>-->
+<!--                </div>-->
 
-                <!--文集-->
-                <div class="ui-block">
-                    <div class="ui-block-title">
-                        <h6 class="title">文集</h6>
-                    </div>
-                    <div class="ui-block-content">
-                        <ul class="widget w-personal-info item-block">
-                            <li th:each="kind:${kinds}" style="margin-top: -20px;padding: 15px 10px;">
-                                <a th:href="@{search(kindId=${kind.id})}" style="font-weight: 300" class="h6"
-                                   th:text="${kind.name}"></a>
-                                <span class="float-right" th:text="${kind.articleCount + '篇'}"></span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+<!--                &lt;!&ndash;文集&ndash;&gt;-->
+<!--                <div class="ui-block">-->
+<!--                    <div class="ui-block-title">-->
+<!--                        <h6 class="title">文集</h6>-->
+<!--                    </div>-->
+<!--                    <div class="ui-block-content">-->
+<!--                        <ul class="widget w-personal-info item-block">-->
+<!--                            <li th:each="kind:${kinds}" style="margin-top: -20px;padding: 15px 10px;">-->
+<!--                                <a th:href="@{search(kindId=${kind.id})}" style="font-weight: 300" class="h6"-->
+<!--                                   th:text="${kind.name}"></a>-->
+<!--                                <span class="float-right" th:text="${kind.articleCount + '篇'}"></span>-->
+<!--                            </li>-->
+<!--                        </ul>-->
+<!--                    </div>-->
+<!--                </div>-->
 
-                <!--文章归档-->
-                <div class="ui-block">
-                    <div class="ui-block-title">
-                        <h6 class="title">文章归档</h6>
-                    </div>
-                    <div class="ui-block-content">
-                        <ul class="widget w-personal-info item-block">
-                            <li th:each="archive:${archives}" style="margin-top: -20px;padding: 15px 10px;">
-                                <a th:href="@{search(date=${archive.date})}" style="font-weight: 300" class="h6" th:text="${archive.date}"></a>
-                                <span class="float-right" th:text="${archive.count + '篇'}"></span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+<!--                &lt;!&ndash;文章归档&ndash;&gt;-->
+<!--                <div class="ui-block">-->
+<!--                    <div class="ui-block-title">-->
+<!--                        <h6 class="title">文章归档</h6>-->
+<!--                    </div>-->
+<!--                    <div class="ui-block-content">-->
+<!--                        <ul class="widget w-personal-info item-block">-->
+<!--                            <li th:each="archive:${archives}" style="margin-top: -20px;padding: 15px 10px;">-->
+<!--                                <a th:href="@{search(date=${archive.date})}" style="font-weight: 300" class="h6" th:text="${archive.date}"></a>-->
+<!--                                <span class="float-right" th:text="${archive.count + '篇'}"></span>-->
+<!--                            </li>-->
+<!--                        </ul>-->
+<!--                    </div>-->
+<!--                </div>-->
 
             </aside>
         </div>

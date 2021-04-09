@@ -180,18 +180,18 @@
                                     </li>
                                 </ul>
                             </div>
-                            <div class="btn btn-control bg-blue more">
-                                <img src="https://gitee.com/anmiho/blog-images/raw/master/other/0a6296556d5c41788eddb1f44b9f6824.png"
-                                     class="author-thumb" alt="">
-                                <ul class="more-dropdown more-with-triangle triangle-bottom-right">
-                                    <li>
-                                        <a href="#">微信公众号</a>
-                                    </li>
-                                    <li>
-                                        <img style="width: 150px;height: 150px" th:src="${user.publicWechat}" alt="">
-                                    </li>
-                                </ul>
-                            </div>
+<!--                            <div class="btn btn-control bg-blue more">-->
+<!--                                <img src="https://gitee.com/anmiho/blog-images/raw/master/other/0a6296556d5c41788eddb1f44b9f6824.png"-->
+<!--                                     class="author-thumb" alt="">-->
+<!--                                <ul class="more-dropdown more-with-triangle triangle-bottom-right">-->
+<!--                                    <li>-->
+<!--                                        <a href="#">微信公众号</a>-->
+<!--                                    </li>-->
+<!--                                    <li>-->
+<!--                                        <img style="width: 150px;height: 150px" th:src="${user.publicWechat}" alt="">-->
+<!--                                    </li>-->
+<!--                                </ul>-->
+<!--                            </div>-->
                         </div>
                     </div>
                     <div class="top-header-author">
@@ -266,9 +266,9 @@
                                         </div>
                                     </div>
 
-                                    <div class="comments-shared">
-                                        <span>阅读：[[${article.readCount}]]</span>
-                                    </div>
+<!--                                    <div class="comments-shared">-->
+<!--                                        <span>阅读：[[${article.readCount}]]</span>-->
+<!--                                    </div>-->
 
                                 </div>
                             </div>
@@ -294,7 +294,7 @@
                         <a class="page-link" th:href="@{index(page=${totalPage})}">最后一页</a>
                     </li>
                     <li class="page-item disabled">
-                        <a class="page-link" href="#" tabindex="-1">共：[[${totalPage}]]页</a>
+                        <a class="page-link" href="#" tabindex="-1">共[[${totalPage}]]页</a>
                     </li>
                 </ul>
             </nav>
@@ -380,24 +380,24 @@
                 </div>
             </div>
 
-            <!--搜索-->
-            <div class="ui-block">
-                <div class="ui-block-content">
-                    <form action="search" method="get" onsubmit="return checkSearch()">
-                        <from class="w-search">
-                            <div class="form-group with-button">
-                                <input id="search" autocomplete="off" class="form-control" name="content" type="text"
-                                       placeholder="输入关键词进行站内搜索">
-                                <button>
-                                    <svg class="olymp-magnifying-glass-icon">
-                                        <use xlink:href="front/svg-icons/sprites/icons.svg#olymp-magnifying-glass-icon"></use>
-                                    </svg>
-                                </button>
-                            </div>
-                        </from>
-                    </form>
-                </div>
-            </div>
+<!--            &lt;!&ndash;搜索&ndash;&gt;-->
+<!--            <div class="ui-block">-->
+<!--                <div class="ui-block-content">-->
+<!--                    <form action="search" method="get" onsubmit="return checkSearch()">-->
+<!--                        <from class="w-search">-->
+<!--                            <div class="form-group with-button">-->
+<!--                                <input id="search" autocomplete="off" class="form-control" name="content" type="text"-->
+<!--                                       placeholder="输入关键词进行站内搜索">-->
+<!--                                <button>-->
+<!--                                    <svg class="olymp-magnifying-glass-icon">-->
+<!--                                        <use xlink:href="front/svg-icons/sprites/icons.svg#olymp-magnifying-glass-icon"></use>-->
+<!--                                    </svg>-->
+<!--                                </button>-->
+<!--                            </div>-->
+<!--                        </from>-->
+<!--                    </form>-->
+<!--                </div>-->
+<!--            </div>-->
 
             <!--公告-->
             <div class="ui-block">
@@ -408,17 +408,17 @@
                     <div class="text" style="text-indent: 1em;font-size: 14px" th:text="${front.notice}">
 
                     </div>
-                    <hr>
-                    <div><a th:if="${front.noticeImg != null}" th:href="@{${front.imgTarget}}"><img style="width: 100%"
-                                                                                                    th:src="${front.noticeImg}"
-                                                                                                    alt=""></a></div>
+<!--                    <hr>-->
+<!--                    <div><a th:if="${front.noticeImg != null}" th:href="@{${front.imgTarget}}"><img style="width: 100%"-->
+<!--                                                                                                    th:src="${front.noticeImg}"-->
+<!--                                                                                                    alt=""></a></div>-->
                 </div>
             </div>
 
             <!--热门文章-->
             <div class="ui-block">
                 <div class="ui-block-title">
-                    <h6 class="title">热门文章</h6>
+                    <h6 class="title">文章</h6>
                 </div>
                 <div class="ui-block-content">
 
@@ -433,58 +433,58 @@
                 </div>
             </div>
 
-            <!--标签云-->
-            <div class="ui-block">
-                <div class="ui-block-title">
-                    <h6 class="title">标签云</h6>
-                </div>
-                <div class="ui-block-content">
-                    <a th:if="${tag.articleCount >= 6 and tag.articleCount < 9}" th:each="tag:${tags}"
-                       th:text="${tag.name + '('+tag.articleCount+')'}"
-                       style="font-size: 18px"
-                       class="tag-cloud" th:href="@{search(tagId=${tag.id})}"></a>
-                    <a th:if="${tag.articleCount >= 3 and tag.articleCount < 6}" th:each="tag:${tags}"
-                       th:text="${tag.name + '('+tag.articleCount+')'}"
-                       style="font-size: 14px"
-                       class="tag-cloud" th:href="@{search(tagId=${tag.id})}"></a>
-                    <a th:if="${tag.articleCount > 0 and tag.articleCount < 3}" th:each="tag:${tags}"
-                       th:text="${tag.name + '('+tag.articleCount+')'}"
-                       style="font-size: 10px"
-                       class="tag-cloud" th:href="@{search(tagId=${tag.id})}"></a>
-                </div>
-            </div>
+<!--            &lt;!&ndash;标签云&ndash;&gt;-->
+<!--            <div class="ui-block">-->
+<!--                <div class="ui-block-title">-->
+<!--                    <h6 class="title">标签云</h6>-->
+<!--                </div>-->
+<!--                <div class="ui-block-content">-->
+<!--                    <a th:if="${tag.articleCount >= 6 and tag.articleCount < 9}" th:each="tag:${tags}"-->
+<!--                       th:text="${tag.name + '('+tag.articleCount+')'}"-->
+<!--                       style="font-size: 18px"-->
+<!--                       class="tag-cloud" th:href="@{search(tagId=${tag.id})}"></a>-->
+<!--                    <a th:if="${tag.articleCount >= 3 and tag.articleCount < 6}" th:each="tag:${tags}"-->
+<!--                       th:text="${tag.name + '('+tag.articleCount+')'}"-->
+<!--                       style="font-size: 14px"-->
+<!--                       class="tag-cloud" th:href="@{search(tagId=${tag.id})}"></a>-->
+<!--                    <a th:if="${tag.articleCount > 0 and tag.articleCount < 3}" th:each="tag:${tags}"-->
+<!--                       th:text="${tag.name + '('+tag.articleCount+')'}"-->
+<!--                       style="font-size: 10px"-->
+<!--                       class="tag-cloud" th:href="@{search(tagId=${tag.id})}"></a>-->
+<!--                </div>-->
+<!--            </div>-->
 
-            <!--文集-->
-            <div class="ui-block">
-                <div class="ui-block-title">
-                    <h6 class="title">文集</h6>
-                </div>
-                <div class="ui-block-content">
-                    <ul class="widget w-personal-info item-block">
-                        <li th:each="kind:${kinds}" style="margin-top: -20px;padding: 15px 10px;">
-                            <a th:href="@{search(kindId=${kind.id})}" style="font-weight: 300" class="h6"
-                               th:text="${kind.name}"></a>
-                            <span class="float-right" th:text="${kind.articleCount + '篇'}"></span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+<!--            &lt;!&ndash;文集&ndash;&gt;-->
+<!--            <div class="ui-block">-->
+<!--                <div class="ui-block-title">-->
+<!--                    <h6 class="title">文集</h6>-->
+<!--                </div>-->
+<!--                <div class="ui-block-content">-->
+<!--                    <ul class="widget w-personal-info item-block">-->
+<!--                        <li th:each="kind:${kinds}" style="margin-top: -20px;padding: 15px 10px;">-->
+<!--                            <a th:href="@{search(kindId=${kind.id})}" style="font-weight: 300" class="h6"-->
+<!--                               th:text="${kind.name}"></a>-->
+<!--                            <span class="float-right" th:text="${kind.articleCount + '篇'}"></span>-->
+<!--                        </li>-->
+<!--                    </ul>-->
+<!--                </div>-->
+<!--            </div>-->
 
-            <!--文章归档-->
-            <div class="ui-block">
-                <div class="ui-block-title">
-                    <h6 class="title">文章归档</h6>
-                </div>
-                <div class="ui-block-content">
-                    <ul class="widget w-personal-info item-block">
-                        <li th:each="archive:${archives}" style="margin-top: -20px;padding: 15px 10px;">
-                            <a th:href="@{search(date=${archive.date})}" style="font-weight: 300" class="h6"
-                               th:text="${archive.date}"></a>
-                            <span class="float-right" th:text="${archive.count + '篇'}"></span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+<!--            &lt;!&ndash;文章归档&ndash;&gt;-->
+<!--            <div class="ui-block">-->
+<!--                <div class="ui-block-title">-->
+<!--                    <h6 class="title">文章归档</h6>-->
+<!--                </div>-->
+<!--                <div class="ui-block-content">-->
+<!--                    <ul class="widget w-personal-info item-block">-->
+<!--                        <li th:each="archive:${archives}" style="margin-top: -20px;padding: 15px 10px;">-->
+<!--                            <a th:href="@{search(date=${archive.date})}" style="font-weight: 300" class="h6"-->
+<!--                               th:text="${archive.date}"></a>-->
+<!--                            <span class="float-right" th:text="${archive.count + '篇'}"></span>-->
+<!--                        </li>-->
+<!--                    </ul>-->
+<!--                </div>-->
+<!--            </div>-->
 
             <!--友情链接-->
             <div class="ui-block">
@@ -501,32 +501,32 @@
                 </div>
             </div>
 
-            <!--友情链接-->
-            <div class="ui-block">
-                <div class="ui-block-title">
-                    <h6 class="title">访问统计</h6>
-                </div>
-                <div class="ui-block-content">
-                    <ul class="widget w-personal-info item-block">
-                        <li style="margin-top: -20px">
-                            昨日访问：
-                            <span class="float-right">1</span>
-                        </li>
-                        <li style="margin-top: -20px">
-                            昨日访客：
-                            <span class="float-right">1</span>
-                        </li>
-                        <li style="margin-top: -20px">
-                            总计访问：
-                            <span class="float-right">1</span>
-                        </li>
-                        <li style="margin-top: -20px">
-                            总计访客：
-                            <span class="float-right">1</span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+<!--            &lt;!&ndash;访问统计&ndash;&gt;-->
+<!--            <div class="ui-block">-->
+<!--                <div class="ui-block-title">-->
+<!--                    <h6 class="title">访问统计</h6>-->
+<!--                </div>-->
+<!--                <div class="ui-block-content">-->
+<!--                    <ul class="widget w-personal-info item-block">-->
+<!--                        <li style="margin-top: -20px">-->
+<!--                            昨日访问：-->
+<!--                            <span class="float-right">1</span>-->
+<!--                        </li>-->
+<!--                        <li style="margin-top: -20px">-->
+<!--                            昨日访客：-->
+<!--                            <span class="float-right">1</span>-->
+<!--                        </li>-->
+<!--                        <li style="margin-top: -20px">-->
+<!--                            总计访问：-->
+<!--                            <span class="float-right">1</span>-->
+<!--                        </li>-->
+<!--                        <li style="margin-top: -20px">-->
+<!--                            总计访客：-->
+<!--                            <span class="float-right">1</span>-->
+<!--                        </li>-->
+<!--                    </ul>-->
+<!--                </div>-->
+<!--            </div>-->
 
         </div>
 

@@ -36,7 +36,7 @@ public class SystemController extends BaseController {
             return "error/404";
         }
         // 更新/新增 访问数据
-        statisticsService.update(request, -1);
+//        statisticsService.update(request, -1);
         // 获取主页的10篇文章
         List<Article> articles = articleService.orderByPublishTime(page);
         // 获取所有标签
@@ -86,9 +86,9 @@ public class SystemController extends BaseController {
             return "error/401";
         }
         // 更新/新增 访问数据
-        statisticsService.update(request, id);
+//        statisticsService.update(request, id);
         // 更新阅读量
-        articleService.addReadCount(id);
+//        articleService.addReadCount(id);
         // 获取阅读量
         Integer readCount = articleService.getReadCount(id);
         // 获取所有标签
